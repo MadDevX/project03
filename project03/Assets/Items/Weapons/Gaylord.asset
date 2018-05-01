@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 429122a9ec71bdf489e3e2cfbce97365, type: 3}
+  m_Name: Gaylord
+  m_EditorClassIdentifier: 
+  name: Gaylord
+  description: Weapon of unfathomable power.
+  forceMult: 2
+  damageMult: 2
+  bulletTTL: 2.5
+  reattackTime: 0.5
+  effectsDuration: 0.1
+  material: {fileID: 2100000, guid: 00bd607bdeb14af4b8165a0f5eb6a481, type: 2}
+  weaponModel: {fileID: 1392327896686786, guid: c5d3b03afaa97b94ba36927c105f58e2,
+    type: 2}
+  bulletPrefab: {fileID: 1272490429744462, guid: 681786f0a7c419542944c277bc2d5f18,
+    type: 2}
