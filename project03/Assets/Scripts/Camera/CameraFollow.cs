@@ -8,13 +8,13 @@ public class CameraFollow : MonoBehaviour
     public float lerpFactor;
     public Transform player;
 
-    private Vector3 offset;
+    [SerializeField] private Vector3 offset;
     private Vector3 startPosition;
+
 	// Use this for initialization
 	void Start ()
     {
         startPosition = transform.position;
-        offset = startPosition - player.position ;
 	}
 	
 	// Update is called once per frame
