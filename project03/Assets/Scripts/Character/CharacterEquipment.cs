@@ -6,12 +6,6 @@ using Enums;
 
 public class CharacterEquipment : MonoBehaviour {
 
-    //public enum ItemType
-    //{
-    //    Weapon,
-    //    Armor,
-    //    Accessory
-    //}
     [HideInInspector] public Weapon currentWeapon;
     [SerializeField] private Vector3 weaponAttach;
     [SerializeField] private Vector3 weaponRotation;
@@ -85,6 +79,7 @@ public class CharacterEquipment : MonoBehaviour {
             }
             ConvertToInteractable(currentWeapon);
             currentWeapon.gameObject.FindComponentInChildWithTag<LineRenderer>("BulletSpawn").enabled = false;
+            currentWeapon = null;
         }
     }
 
