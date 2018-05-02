@@ -80,8 +80,8 @@ public class PlayerAction : MonoBehaviour {
             }
             else
             {
-                StopCoroutine("Fade");
-                StartCoroutine("Fade");
+                StopCoroutine(Fade());
+                StartCoroutine(Fade());
             }
         }
 
