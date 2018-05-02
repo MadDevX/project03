@@ -12,6 +12,7 @@ public class PlayerAction : MonoBehaviour {
     public int interactionLingerFrames = 20;
     private int interactableMask;
     private CharacterEquipment equip;
+    private IInteractable activeObject;
 	// Use this for initialization
 	void Start ()
     {
@@ -22,6 +23,8 @@ public class PlayerAction : MonoBehaviour {
         interactableMask = LayerMask.GetMask("Interactable");
         equip = GetComponent<CharacterEquipment>();
         interactionRenderer.transform.localScale = new Vector3(interactionRange, interactionRange, 0);
+        activeObject = null;
+        StartCoroutine(HighlightInteractable());
         #region DEBUG COLOR
         Color c = interactionRenderer.color;
         c.a = 0;
@@ -34,7 +37,7 @@ public class PlayerAction : MonoBehaviour {
     {
 		if(Input.GetKeyUp(KeyCode.E))
         {
-            FindItem();
+            InteractWith();
         }
         if(Input.GetKeyDown(KeyCode.T))
         {
@@ -63,28 +66,57 @@ public class PlayerAction : MonoBehaviour {
     /// <summary>
     /// Checks if cursor is currently over an interactable objects and interacts if object was found.
     /// </summary>
-    void FindItem()
+    void InteractWith()
     {
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        Physics.Raycast(ray, out hit, maxDist, interactableMask);
-        if (hit.transform)
+        if(activeObject!=null)
         {
-            if ((hit.transform.position - transform.position).magnitude <= interactionRange)
+            activeObject.StopHighlight();
+            activeObject.Interact(equip);
+        }
+        else
+        {
+            StopCoroutine(Fade());
+            StartCoroutine(Fade());
+        }
+    }
+
+    IEnumerator HighlightInteractable()
+    {
+        while (true)
+        {
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            Physics.Raycast(ray, out hit, maxDist, interactableMask);
+            if (hit.transform && ((hit.transform.position - transform.position).magnitude <= interactionRange))
             {
-                IInteractable interactable = hit.transform.GetComponent<IInteractable>();
-                if (interactable != null)
+                IInteractable newInteractable = hit.transform.GetComponent<IInteractable>();
+                if (newInteractable != null)
                 {
-                    interactable.Interact(equip);
+                    if (activeObject == null)
+                    {
+                        activeObject = newInteractable;
+                        activeObject.Highlight();
+                    }
+                    else if(activeObject!=newInteractable)
+                    {
+                            activeObject.StopHighlight();
+                            activeObject = newInteractable;
+                            activeObject.Highlight();
+                    }
+                }
+                else
+                {
+                    activeObject.StopHighlight();
+                    activeObject = null;
                 }
             }
-            else
+            else if(activeObject!=null)
             {
-                StopCoroutine(Fade());
-                StartCoroutine(Fade());
+                activeObject.StopHighlight();
+                activeObject = null;
             }
+            yield return new WaitForSeconds(.1f);
         }
-
     }
 
     //DEBUG

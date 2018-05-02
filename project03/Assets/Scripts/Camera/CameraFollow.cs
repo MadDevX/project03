@@ -13,6 +13,8 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private Vector3 offset;
     private Vector3 startPosition;
     private int fadingMask;
+    private int fadingLayer;
+    private int ignoreLayer;
     private float rotateInput;
 
 	// Use this for initialization
@@ -20,8 +22,10 @@ public class CameraFollow : MonoBehaviour
     {
         startPosition = transform.position;
         fadingMask = LayerMask.GetMask("Fading");
+        fadingLayer = LayerMask.NameToLayer("Fading");
+        ignoreLayer = LayerMask.NameToLayer("Ignore Raycast");
         StartCoroutine(CheckObstacles());
-        Debug.Log(fadingMask);
+        Debug.Log(fadingMask + " " + fadingLayer + " " + ignoreLayer);
 	}
 
     private void Update()
@@ -58,6 +62,7 @@ public class CameraFollow : MonoBehaviour
                 Debug.Log(hit.transform.name);
                 roof = hit.transform.GetComponent<MeshRenderer>();
                 roof.enabled = false;
+                //roof.gameObject.layer = ignoreLayer;
                 //Color c = roof.material.color;
                 //c.a = 0;
                 //roof.material.color = c;
@@ -65,6 +70,7 @@ public class CameraFollow : MonoBehaviour
             else if(roof!=null)
             {
                 roof.enabled = true;
+                ///roof.gameObject.layer = fadingLayer;
                 //Color c = roof.material.color;
                 //c.a = 1;
                 //roof.material.color = c;

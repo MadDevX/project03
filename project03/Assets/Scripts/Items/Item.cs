@@ -30,11 +30,12 @@ public class Item : MonoBehaviour, IInteractable
         startColor = itemRenderer.material.color;
     }
 
-    private void OnMouseEnter()
+    public virtual void Highlight()
     {
-        itemRenderer.material.color += Color.white / 2;    }
+        itemRenderer.material.color += Color.white / 2;
+    }
 
-    private void OnMouseExit()
+    public virtual void StopHighlight()
     {
         itemRenderer.material.color = startColor;
     }

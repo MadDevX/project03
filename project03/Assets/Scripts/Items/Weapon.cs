@@ -68,7 +68,7 @@ public class Weapon : Item
             timer = 0f;
             GameObject bullet = Instantiate(stats.bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
             EnableEffects();
-            bullet.GetComponent<Bullet>().SetMultipliers(stats.forceMult, stats.damageMult);
+            bullet.GetComponent<Bomb>().SetMultipliers(stats.forceMult, stats.damageMult);
             Destroy(bullet, stats.bulletTTL);
         }
     }
