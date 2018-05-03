@@ -33,11 +33,14 @@ public class CharacterHealth : MonoBehaviour {
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
-        healthSlider.value = currentHealth;
-        if(currentHealth<=0)
+        if (currentHealth > 0)
         {
-            Death();
+            currentHealth -= damage;
+            healthSlider.value = currentHealth;
+            if (currentHealth <= 0)
+            {
+                Death();
+            }
         }
     }
 
