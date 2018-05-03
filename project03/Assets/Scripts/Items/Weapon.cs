@@ -11,6 +11,7 @@ public class Weapon : Item
     //Components and state variables
     private Light shootingLight;
     private ParticleSystem particles;
+    private AudioSource audio;
     private bool effectsEnabled = false;
     private float timer;
 
@@ -37,6 +38,7 @@ public class Weapon : Item
         bulletSpawn = gameObject.FindComponentInChildWithTag<Transform>("BulletSpawn");
         shootingLight = bulletSpawn.GetComponent<Light>();
         particles = bulletSpawn.GetComponent<ParticleSystem>();
+        audio = bulletSpawn.GetComponent<AudioSource>();
 	}
 
     private void Update()
@@ -77,6 +79,8 @@ public class Weapon : Item
     {
         shootingLight.enabled = true;
         particles.Play();
+        audio.Stop();
+        audio.Play();
         effectsEnabled = true;
     }
 

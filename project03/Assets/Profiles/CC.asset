@@ -33,7 +33,7 @@ MonoBehaviour:
     m_Settings:
       method: 0
       fxaaSettings:
-        preset: 2
+        preset: 4
       taaSettings:
         jitterSpread: 0.75
         sharpen: 0.3
@@ -42,8 +42,8 @@ MonoBehaviour:
   ambientOcclusion:
     m_Enabled: 1
     m_Settings:
-      intensity: 2
-      radius: 0.5
+      intensity: 1.5
+      radius: 0.35
       sampleCount: 10
       downsampling: 1
       forceForwardCompatibility: 0
@@ -69,18 +69,18 @@ MonoBehaviour:
       screenEdgeMask:
         intensity: 0.03
   depthOfField:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       focusDistance: 10
-      aperture: 5.6
-      focalLength: 50
+      aperture: 3
+      focalLength: 90
       useCameraFov: 0
       kernelSize: 1
   motionBlur:
     m_Enabled: 1
     m_Settings:
       shutterAngle: 300
-      sampleCount: 15
+      sampleCount: 10
       frameBlending: 0
   eyeAdaptation:
     m_Enabled: 0
@@ -284,12 +284,12 @@ MonoBehaviour:
     m_Enabled: 1
     m_Settings:
       spectralTexture: {fileID: 2800000, guid: 42183971d24cfe443a346e7ec6e83bbb, type: 3}
-      intensity: 0.12
+      intensity: 0.13
   grain:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       colored: 0
-      intensity: 0.217
+      intensity: 0.15
       size: 1
       luminanceContribution: 1
   vignette:
