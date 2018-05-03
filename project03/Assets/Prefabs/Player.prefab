@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 223212574013133884}
   - component: {fileID: 114643789480229922}
   - component: {fileID: 114875563373972820}
-  - component: {fileID: 114332413979956926}
+  - component: {fileID: 114877194294174736}
   m_Layer: 5
   m_Name: CharacterIndicator
   m_TagString: Untagged
@@ -253,7 +253,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1775658234112748}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: -25, y: 1, z: 15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4036889845379814}
@@ -424,8 +424,8 @@ TrailRenderer:
       m_RotationOrder: 0
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0, g: 0.459, b: 1, a: 1}
-      key1: {r: 0, g: 0.459, b: 1, a: 0.19607843}
+      key0: {r: 0, g: 0.17212504, b: 0.375, a: 0.39215687}
+      key1: {r: 0, g: 0.14512503, b: 0.31617647, a: 0}
       key2: {r: 1, g: 1, b: 1, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -441,7 +441,7 @@ TrailRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 32768
+      atime1: 65535
       atime2: 65535
       atime3: 0
       atime4: 0
@@ -450,7 +450,7 @@ TrailRenderer:
       atime7: 0
       m_Mode: 0
       m_NumColorKeys: 2
-      m_NumAlphaKeys: 3
+      m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
@@ -484,17 +484,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c910f7b7df91bd49876531d5867bbd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114332413979956926
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1006827952536084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e222a44a400078a41abc9700c57e17ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114341000070231764
@@ -733,6 +722,17 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114877194294174736
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1006827952536084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b84d6ebf23a795c44a2a0ae18fefb3c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114896504960516286
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -6,21 +6,21 @@ public class FixedRotation : MonoBehaviour {
 
     private RectTransform rectTransform;
     private Quaternion rotation;
-    private Transform parent;
-    private Vector3 offset;
+    //private Transform parent;
+    //private Vector3 offset;
 	// Use this for initialization
 	void Awake ()
     {
-        parent = transform.parent;
+        //parent = transform.parent;
         rectTransform = GetComponent<RectTransform>();
         rotation = rectTransform.rotation;
-        offset = rectTransform.position - parent.position;
+        //offset = rectTransform.position - parent.position;
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
         rectTransform.rotation = rotation;
-        rectTransform.position = parent.position + offset;
+        //rectTransform.position = parent.position + offset;
 	}
 }

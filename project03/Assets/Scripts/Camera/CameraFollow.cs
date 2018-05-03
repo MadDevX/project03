@@ -13,8 +13,6 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private Vector3 offset;
     private Vector3 startPosition;
     private int fadingMask;
-    //private int fadingLayer;
-    //private int ignoreLayer;
     private float rotateInput;
 
     public Transform Player
@@ -36,8 +34,6 @@ public class CameraFollow : MonoBehaviour
     {
         startPosition = transform.position;
         fadingMask = LayerMask.GetMask("Fading");
-        //fadingLayer = LayerMask.NameToLayer("Fading");
-        //ignoreLayer = LayerMask.NameToLayer("Ignore Raycast");
         StartCoroutine(CheckObstacles());
 	}
 

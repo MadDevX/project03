@@ -204,7 +204,8 @@ MonoBehaviour:
   explosionRadius: 3
   explosionForce: 4
   damage: 25
-  explosionEffect: {fileID: 164416, guid: 7c4c0d143333a3844acc2b70053b4d46, type: 2}
+  explosionEffect: {fileID: 1979374102920828, guid: 608804630024eb3488ceb55a2a86c0fe,
+    type: 2}
 --- !u!135 &135837729906946474
 SphereCollider:
   m_ObjectHideFlags: 1
