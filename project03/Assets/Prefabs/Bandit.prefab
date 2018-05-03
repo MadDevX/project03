@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 33242291109884354}
   - component: {fileID: 65739779838504618}
   - component: {fileID: 23497770654650368}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mohawk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 33009777207366208}
   - component: {fileID: 65878416594491548}
   - component: {fileID: 23227524978250028}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Visor
   m_TagString: Visor
   m_Icon: {fileID: 0}
@@ -227,7 +227,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1992067544917990}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.63, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4893928864652840}

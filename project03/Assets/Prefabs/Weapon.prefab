@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 108619344832188072}
   - component: {fileID: 199887820368339132}
   - component: {fileID: 198373329255564398}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bullet Spawn
   m_TagString: BulletSpawn
   m_Icon: {fileID: 0}

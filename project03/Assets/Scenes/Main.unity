@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 48211051}
   - component: {fileID: 48211050}
   - component: {fileID: 48211049}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: South Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,7 +211,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 127
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &93653729
 Transform:
@@ -1261,7 +1261,7 @@ GameObject:
   - component: {fileID: 363430498}
   - component: {fileID: 363430497}
   - component: {fileID: 363430496}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Building
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2237,7 +2237,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 389361400}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Boundaries
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2272,7 +2272,7 @@ GameObject:
   - component: {fileID: 514659599}
   - component: {fileID: 514659598}
   - component: {fileID: 514659597}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: East Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2524,7 +2524,7 @@ GameObject:
   - component: {fileID: 715415670}
   - component: {fileID: 715415669}
   - component: {fileID: 715415668}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: North Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2945,7 +2945,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294966239
+    m_Bits: 4294966238
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 8716699687f89f444844f1e0836862dc, type: 2}
   m_TargetDisplay: 0
@@ -3086,7 +3086,7 @@ GameObject:
   - component: {fileID: 1393795470}
   - component: {fileID: 1393795469}
   - component: {fileID: 1393795468}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4215,7 +4215,7 @@ GameObject:
   - component: {fileID: 2050921217}
   - component: {fileID: 2050921216}
   - component: {fileID: 2050921215}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: West Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
