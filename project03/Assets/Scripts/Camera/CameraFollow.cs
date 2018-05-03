@@ -8,7 +8,7 @@ public class CameraFollow : MonoBehaviour
     public float lerpFactor;
     public float rotateSpeed = 100f;
     public int fadeoutFrames = 20;
-    public Transform player;
+    [SerializeField] private Transform player;
 
     [SerializeField] private Vector3 offset;
     private Vector3 startPosition;
@@ -16,6 +16,20 @@ public class CameraFollow : MonoBehaviour
     private int fadingLayer;
     private int ignoreLayer;
     private float rotateInput;
+
+    public Transform Player
+    {
+        get
+        {
+            return player;
+        }
+
+        set
+        {
+            player = value;
+            StartCoroutine(CheckObstacles());
+        }
+    }
 
 	// Use this for initialization
 	void Start ()
@@ -55,7 +69,7 @@ public class CameraFollow : MonoBehaviour
     {
         RaycastHit hit;
         MeshRenderer roof = null;
-        while (true)
+        while (player.transform)
         {
             if (Physics.Raycast(transform.position, player.position-transform.position, out hit, maxDistance, fadingMask))
             {
@@ -78,5 +92,10 @@ public class CameraFollow : MonoBehaviour
             }
             yield return new WaitForSeconds(.1f);
         }
+    }
+
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
     }
 }

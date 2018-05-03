@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Bomb : MonoBehaviour {
 
-    public float force = 20;
+    public float initialForce = 20f;
     public float explosionRadius = 2f;
+    public float explosionForce = 10f;
     public int damage = 25;
+    public GameObject explosionEffect;
     private Rigidbody rb;
     private Vector3 lastPosition;
 
@@ -16,54 +18,36 @@ public class Bomb : MonoBehaviour {
         lastPosition = transform.position;
         rb = GetComponent<Rigidbody>();
     }
-    void Start ()
+
+    private void OnTriggerStay(Collider other)
     {
-        //rb.velocity = this.transform.forward * force;
+        transform.position = lastPosition;
+        Explode();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void FixedUpdate()
     {
-        //var hit = collision.gameObject;
-        //if (hit.tag.StartsWith("Character") || hit.tag.StartsWith("Player"))
-        //{
-        //    CharacterHealth ph;
-        //    if ((ph = hit.GetComponent<CharacterHealth>()) != null)
-        //    {
-        //        ph.TakeDamage(damage);
-        //        Destroy(gameObject);
-        //    }
-
-        //}
-        Explode();
+        RaycastHit hit;
+        if (Physics.Linecast(lastPosition, transform.position, out hit))
+        {
+            if (hit.transform != transform)
+            {
+                transform.position = lastPosition;
+                Explode();
+            }
+        }
+        lastPosition = transform.position;
     }
 
     public void SetMultipliers(float forceMult, float damageMult)
     {
-        rb.velocity = this.transform.forward * force * forceMult;
+        rb.velocity = this.transform.forward * initialForce * forceMult;
         damage = (int)(damage * damageMult);
-    }
-    // Update is called once per frame
-    void Update ()
-    {
-
-	}
-
-    private void FixedUpdate()
-    {
-        //RaycastHit hit;
-        //if (Physics.Raycast(lastPosition, transform.position, out hit, (lastPosition - transform.position).magnitude))
-        //{
-        //    if (hit.transform != transform)
-        //    {
-        //        rb.MovePosition(lastPosition);
-        //        //Explode();
-        //    }
-        //}
-        //lastPosition = transform.position;
     }
 
     void Explode()
     {
+        Instantiate(explosionEffect, transform.position, transform.rotation);
         Rigidbody colliderRB;
         CharacterHealth ch;
         Vector3 hitVector;
@@ -72,22 +56,20 @@ public class Bomb : MonoBehaviour {
         foreach (Collider c in collidersHit)
         {
             hitVector = (c.transform.position - transform.position);
-            if (hitVector.magnitude > explosionRadius)
-            {
-                continue;
-            }
+            hitVector.y = 0;
             colliderRB = c.GetComponent<Rigidbody>();
-            if(colliderRB!=null)
+            if(colliderRB!=null && hitVector.magnitude <= explosionRadius)
             {
-                calcForce = (explosionRadius - hitVector.magnitude) * force;
+                calcForce = (explosionRadius - hitVector.magnitude) * explosionForce;
                 hitVector = hitVector.normalized * calcForce;
                 colliderRB.AddForce(hitVector, ForceMode.Impulse);
+                colliderRB.AddExplosionForce(explosionForce, transform.position, explosionRadius);
             }
             ch = c.GetComponent<CharacterHealth>();
             if (ch!=null)
             {
                 float multiplier = (explosionRadius - (c.transform.position - transform.position).magnitude)/explosionRadius;
-                ch.TakeDamage((int)(damage * multiplier));
+                ch.TakeDamage(Mathf.Max(1, (int)(damage * multiplier)));
             }
         }
         Destroy(gameObject);

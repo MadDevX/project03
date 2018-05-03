@@ -3167,7 +3167,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-581700
+  m_Name: pb_Mesh14028
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -3543,7 +3543,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-602736
+  m_Name: pb_Mesh13984
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -4037,38 +4037,6 @@ Prefab:
     - target: {fileID: 4179859772905506, guid: c5d3b03afaa97b94ba36927c105f58e2, type: 2}
       propertyPath: m_RootOrder
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4179859772905506, guid: c5d3b03afaa97b94ba36927c105f58e2, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 4179859772905506, guid: c5d3b03afaa97b94ba36927c105f58e2, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4179859772905506, guid: c5d3b03afaa97b94ba36927c105f58e2, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114976012125621514, guid: c5d3b03afaa97b94ba36927c105f58e2,
-        type: 2}
-      propertyPath: weapon
-      value: 
-      objectReference: {fileID: 11400000, guid: 0a262ab9db28222449df39e6ce56df36,
-        type: 2}
-    - target: {fileID: 114976012125621514, guid: c5d3b03afaa97b94ba36927c105f58e2,
-        type: 2}
-      propertyPath: stats
-      value: 
-      objectReference: {fileID: 11400000, guid: 0a262ab9db28222449df39e6ce56df36,
-        type: 2}
-    - target: {fileID: 4179859772905506, guid: c5d3b03afaa97b94ba36927c105f58e2, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 0.60000026
-      objectReference: {fileID: 0}
-    - target: {fileID: 4179859772905506, guid: c5d3b03afaa97b94ba36927c105f58e2, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 0.30000013
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c5d3b03afaa97b94ba36927c105f58e2, type: 2}

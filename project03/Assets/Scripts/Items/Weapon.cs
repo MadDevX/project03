@@ -66,7 +66,7 @@ public class Weapon : Item
         if (timer >= stats.reattackTime)
         {
             timer = 0f;
-            GameObject bullet = Instantiate(stats.bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+            GameObject bullet = Instantiate(stats.bulletPrefab, bulletSpawn.position/*+bulletSpawn.transform.forward*stats.bulletPrefab.transform.localScale.z*/, bulletSpawn.rotation);
             EnableEffects();
             bullet.GetComponent<Bomb>().SetMultipliers(stats.forceMult, stats.damageMult);
             Destroy(bullet, stats.bulletTTL);
