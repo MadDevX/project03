@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FaderAsync;
 
 public class CameraFollow : MonoBehaviour
 {
     public float maxDistance = 100f;
     public float lerpFactor;
     public float rotateSpeed = 100f;
-    public int fadeoutFrames = 20;
+    public int fadeoutFrames = 15;
     [SerializeField] private Transform player;
 
     [SerializeField] private Vector3 offset;
@@ -40,7 +41,7 @@ public class CameraFollow : MonoBehaviour
     private void Update()
     {
         //rotateInput = Input.GetAxis("Rotate") * rotateSpeed * Time.deltaTime;
-        if(Input.GetMouseButtonDown(2) || Input.GetMouseButtonUp(2))
+        if(Input.GetButtonDown("Flip") || Input.GetButtonUp("Flip"))
         {
             offset = Quaternion.AngleAxis(180, Vector3.up) * offset;
         }
@@ -63,28 +64,28 @@ public class CameraFollow : MonoBehaviour
     IEnumerator CheckObstacles()
     {
         RaycastHit hit;
-        MeshRenderer roof = null;
+        MeshRenderer fadingOut = null;
         while (player.transform)
         {
             if (Physics.Raycast(transform.position, player.position-transform.position, out hit, maxDistance, fadingMask))
             {
-                roof = hit.transform.GetComponent<MeshRenderer>();
-                roof.enabled = false;
-                //roof.gameObject.layer = ignoreLayer;
-                //Color c = roof.material.color;
-                //c.a = 0;
-                //roof.material.color = c;
+                MeshRenderer toFade = hit.transform.GetComponent<MeshRenderer>();
+                if (fadingOut != toFade)
+                {
+                    //StopCoroutine(toFade.FadeIn(fadeoutFrames));
+                    StartCoroutine(toFade.FadeOut(fadeoutFrames));
+                    //StopCoroutine(fadingOut.FadeOut(fadeoutFrames));
+                    StartCoroutine(fadingOut.FadeIn(fadeoutFrames));
+                    fadingOut = toFade;
+                }
             }
-            else if(roof!=null)
+            else if(fadingOut!=null)
             {
-                roof.enabled = true;
-                ///roof.gameObject.layer = fadingLayer;
-                //Color c = roof.material.color;
-                //c.a = 1;
-                //roof.material.color = c;
-                roof = null;
+                //StopCoroutine(fadingOut.FadeOut(fadeoutFrames));
+                StartCoroutine(fadingOut.FadeIn(fadeoutFrames));
+                fadingOut = null;
             }
-            yield return new WaitForSeconds(.1f);
+            yield return new WaitForSeconds(.2f);
         }
     }
 

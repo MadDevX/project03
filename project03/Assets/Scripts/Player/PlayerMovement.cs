@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour {
     private int groundMask;
     private Rigidbody rb;
     private Vector3 movement;
-    private Vector3 dodgeDir;
+    //private Vector3 dodgeDir;
 
     // Use this for initialization
     void Awake()
@@ -52,7 +52,11 @@ public class PlayerMovement : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        Dodge();
+        if (movement.magnitude!=0 && Input.GetButton("Jump") && dodgeTimer >= dodgeReset)
+        {
+            Dodge();
+        }
+        dodgeTimer += Time.deltaTime;
         if (dodgeSlider != null)
         {
             UpdateDodgeSlider();
@@ -67,12 +71,8 @@ public class PlayerMovement : MonoBehaviour {
 
     void Dodge()
     {
-        if(Input.GetButton("Jump") && dodgeTimer>=dodgeReset)
-        {
             rb.velocity = movement.normalized * speed*10/6;
             dodgeTimer = 0f;
-        }
-        dodgeTimer += Time.deltaTime;
     }
 
     void Rotate()

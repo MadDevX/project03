@@ -294,11 +294,11 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Rotate
-    descriptiveName: Rotates Camera
+    m_Name: Flip
+    descriptiveName: Flips Camera
     descriptiveNegativeName: 
-    negativeButton: q
-    positiveButton: e
+    negativeButton: 
+    positiveButton: mouse 2
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000

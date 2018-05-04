@@ -53,6 +53,8 @@ public class PlayerAction : MonoBehaviour {
             if (f < 0)
             {
                 c.a = 0;
+                interactionRenderer.color = c;
+                yield break;
             }
             else
             {
@@ -75,8 +77,8 @@ public class PlayerAction : MonoBehaviour {
         }
         else
         {
-            StopCoroutine(Fade());
-            StartCoroutine(Fade());
+            StopCoroutine("Fade");
+            StartCoroutine("Fade");
         }
     }
 

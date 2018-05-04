@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour {
     {
         foreach (Transform t in spawnPositions)
         {
-            Instantiate(enemyPrefab, t);
+            Instantiate(enemyPrefab, t.position, t.rotation);
         }
         enemiesLeft = spawnPositions.Length;
     }
@@ -45,6 +45,6 @@ public class GameController : MonoBehaviour {
 
     public void GameOver()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 }

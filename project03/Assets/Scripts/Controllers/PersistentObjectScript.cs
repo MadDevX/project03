@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PersistentObjectScript : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class PersistentObjectScript : MonoBehaviour
         {
             gameObject.tag = "PersistentObject";
             DontDestroyOnLoad(gameObject);
+            SceneManager.LoadScene(1);
         }
 	}
 	

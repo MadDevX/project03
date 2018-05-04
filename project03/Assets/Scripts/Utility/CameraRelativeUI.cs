@@ -5,16 +5,18 @@ using UnityEngine;
 public class CameraRelativeUI : MonoBehaviour
 {
     private RectTransform rectTransform;
-
+    private Vector3 cameraForward;
     private void Start()
     {
         rectTransform = GetComponent<RectTransform>();
+        cameraForward = Vector3.zero;
     }
 
     private void Update()
     {
-        Vector3 cameraForward = Camera.main.transform.forward;
+        cameraForward = Camera.main.transform.forward;
         cameraForward.y = 0;
-        rectTransform.rotation = Quaternion.LookRotation(Vector3.down, cameraForward);
+        rectTransform.SetPositionAndRotation(rectTransform.position, Quaternion.LookRotation(Vector3.down, cameraForward));
+        //rectTransform.rotation = Quaternion.LookRotation(Vector3.down, cameraForward);
     }
 }

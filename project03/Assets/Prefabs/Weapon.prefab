@@ -58,7 +58,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1277287130497756}
   m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 1.5, z: -0}
+  m_LocalPosition: {x: 0, y: 1.05, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4179859772905506}
@@ -70,9 +70,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1392327896686786}
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -38, y: 0.5, z: 38}
-  m_LocalScale: {x: 0.3, y: 0.60000026, z: 0.30000013}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.6, z: 0.3}
   m_Children:
   - {fileID: 4008075875274848}
   m_Father: {fileID: 0}
@@ -222,8 +222,8 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 1, g: 0.73020834, b: 0.2647059, a: 1}
-  m_Intensity: 1.25
-  m_Range: 5
+  m_Intensity: 1.5
+  m_Range: 4
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 0
-  stats: {fileID: 11400000, guid: 0a262ab9db28222449df39e6ce56df36, type: 2}
+  stats: {fileID: 0}
   bulletSpawn: {fileID: 0}
 --- !u!120 &120191198400547530
 LineRenderer:
@@ -302,7 +302,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 40}
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 0.05
+    widthMultiplier: 0.04
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -323,25 +323,25 @@ LineRenderer:
       m_RotationOrder: 0
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0, b: 0, a: 1}
-      key1: {r: 1, g: 1, b: 0, a: 0.78431374}
-      key2: {r: 0, g: 1, b: 0, a: 0}
-      key3: {r: 0, g: 0, b: 1, a: 1}
+      key0: {r: 1, g: 0, b: 0, a: 0}
+      key1: {r: 1, g: 1, b: 0, a: 0.5709347}
+      key2: {r: 0, g: 1, b: 0, a: 0.47058824}
+      key3: {r: 0, g: 0, b: 1, a: 0}
       key4: {r: 1, g: 0, b: 0, a: 0}
-      key5: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 1, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
-      ctime0: 0
-      ctime1: 16384
-      ctime2: 32768
-      ctime3: 49151
+      ctime0: 3277
+      ctime1: 19661
+      ctime2: 36044
+      ctime3: 52428
       ctime4: 65535
-      ctime5: 0
+      ctime5: 65535
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 19661
-      atime2: 65535
+      atime1: 3277
+      atime2: 19661
       atime3: 65535
       atime4: 0
       atime5: 0
@@ -349,7 +349,7 @@ LineRenderer:
       atime7: 0
       m_Mode: 0
       m_NumColorKeys: 5
-      m_NumAlphaKeys: 3
+      m_NumAlphaKeys: 4
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
@@ -366,7 +366,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 1.6
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &198373329255564398
@@ -426,7 +426,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1969206264
+  randomSeed: -883770758
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -578,7 +578,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 1.2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -870,13 +870,13 @@ ParticleSystem:
     serializedVersion: 4
     enabled: 1
     type: 4
-    angle: 10
+    angle: 5
     length: 5
     boxX: 1
     boxY: 1
     boxZ: 1
     radius:
-      value: 0.05
+      value: 0.01
       mode: 0
       spread: 0
       speed:
@@ -1062,11 +1062,16 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    m_BurstCount: 1
+    m_BurstCount: 2
     m_Bursts:
     - time: 0
-      minCount: 100
-      maxCount: 100
+      minCount: 20
+      maxCount: 20
+      cycleCount: 1
+      repeatInterval: 0.01
+    - time: 0.02
+      minCount: 10
+      maxCount: 10
       cycleCount: 1
       repeatInterval: 0.01
   SizeModule:
@@ -1331,7 +1336,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 1, b: 1, a: 0}
+        key1: {r: 1, g: 1, b: 1, a: 0.5882353}
         key2: {r: 1, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1347,8 +1352,8 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 65535
-        atime2: 0
+        atime1: 40670
+        atime2: 65535
         atime3: 0
         atime4: 0
         atime5: 0
@@ -1356,7 +1361,7 @@ ParticleSystem:
         atime7: 0
         m_Mode: 0
         m_NumColorKeys: 2
-        m_NumAlphaKeys: 2
+        m_NumAlphaKeys: 3
       minGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -1497,7 +1502,7 @@ ParticleSystem:
           tangentMode: 0
         - serializedVersion: 2
           time: 1
-          value: -1
+          value: 0
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -1538,7 +1543,7 @@ ParticleSystem:
           tangentMode: 0
         - serializedVersion: 2
           time: 1
-          value: -1
+          value: 0
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -1573,13 +1578,13 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 2
           time: 0
-          value: 0
-          inSlope: 0
-          outSlope: 0
+          value: 1
+          inSlope: -2
+          outSlope: -2
           tangentMode: 0
         - serializedVersion: 2
           time: 1
-          value: -1
+          value: 0
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -2509,7 +2514,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 0.7655173, b: 0, a: 1}
-        key1: {r: 1, g: 0, b: 0, a: 0.27450982}
+        key1: {r: 1, g: 0.19607843, b: 0, a: 0.27450982}
         key2: {r: 1, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
