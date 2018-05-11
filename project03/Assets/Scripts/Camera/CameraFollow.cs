@@ -6,6 +6,7 @@ using FaderAsync;
 public class CameraFollow : MonoBehaviour
 {
     public float maxDistance = 100f;
+    public float maxCameraDrift = 15f;
     public float lerpFactor;
     public float rotateSpeed = 100f;
     public int fadeoutFrames = 15;
@@ -13,7 +14,9 @@ public class CameraFollow : MonoBehaviour
 
     [SerializeField] private Vector3 offset;
     private Vector3 startPosition;
+    private PlayerMovement playerControls;
     private int fadingMask;
+    private int groundMask;
     private float rotateInput;
 
     public Transform Player
@@ -26,6 +29,7 @@ public class CameraFollow : MonoBehaviour
         set
         {
             player = value;
+            playerControls = player.GetComponent<PlayerMovement>();
             StartCoroutine(CheckObstacles());
         }
     }
@@ -35,15 +39,18 @@ public class CameraFollow : MonoBehaviour
     {
         startPosition = transform.position;
         fadingMask = LayerMask.GetMask("Fading");
+        groundMask = LayerMask.GetMask("Ground");
         StartCoroutine(CheckObstacles());
+        playerControls = player.GetComponent<PlayerMovement>();
 	}
 
     private void Update()
     {
         //rotateInput = Input.GetAxis("Rotate") * rotateSpeed * Time.deltaTime;
-        if(Input.GetButtonDown("Flip") || Input.GetButtonUp("Flip"))
+        if(Input.GetButtonDown("Flip"))
         {
-            offset = Quaternion.AngleAxis(180, Vector3.up) * offset;
+            StartCoroutine("FlipCamera");
+            playerControls.Flip();
         }
     }
 
@@ -52,7 +59,24 @@ public class CameraFollow : MonoBehaviour
     {
         if (player != null)
         {
-            transform.position = Vector3.Lerp(transform.position, player.position + offset, lerpFactor);
+            Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(camRay, out hit, maxDistance, groundMask))
+            {
+                Vector3 targetPosition = (2*player.position + hit.point)/3;
+                float f;
+                if((f=(targetPosition-player.position).magnitude)>maxCameraDrift)
+                {
+                    targetPosition += (player.position - targetPosition).normalized * (f - maxCameraDrift);
+                }
+                targetPosition.y = 0;
+                transform.position = Vector3.Lerp(transform.position, targetPosition + offset, lerpFactor);
+            }
+            else
+            {
+                
+                transform.position = Vector3.Lerp(transform.position, player.position + offset, lerpFactor);
+            }
         }
         else
         {
@@ -72,21 +96,25 @@ public class CameraFollow : MonoBehaviour
                 MeshRenderer toFade = hit.transform.GetComponent<MeshRenderer>();
                 if (fadingOut != toFade)
                 {
-                    //StopCoroutine(toFade.FadeIn(fadeoutFrames));
                     StartCoroutine(toFade.FadeOut(fadeoutFrames));
-                    //StopCoroutine(fadingOut.FadeOut(fadeoutFrames));
                     StartCoroutine(fadingOut.FadeIn(fadeoutFrames));
                     fadingOut = toFade;
                 }
             }
             else if(fadingOut!=null)
             {
-                //StopCoroutine(fadingOut.FadeOut(fadeoutFrames));
                 StartCoroutine(fadingOut.FadeIn(fadeoutFrames));
                 fadingOut = null;
             }
             yield return new WaitForSeconds(.2f);
         }
+    }
+
+    IEnumerator FlipCamera()
+    {
+        offset = Quaternion.AngleAxis(90, Vector3.up) * offset;
+        yield return new WaitForSeconds(Time.deltaTime);
+        offset = Quaternion.AngleAxis(90, Vector3.up) * offset;
     }
 
     private void OnDestroy()

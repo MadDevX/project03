@@ -15,11 +15,12 @@ public class PlayerMovement : MonoBehaviour {
     public Slider dodgeSlider;
 
     private float camRayLength = 100f;
-    private float timer;
-    private float dodgeTimer;
     private int groundMask;
     private Rigidbody rb;
     private Vector3 movement;
+    private float timer;
+    private float dodgeTimer;
+    private bool isFlipped;
     //private Vector3 dodgeDir;
 
     // Use this for initialization
@@ -33,14 +34,21 @@ public class PlayerMovement : MonoBehaviour {
             dodgeSlider.maxValue = dodgeReset;
             dodgeSlider.value = dodgeTimer;
         }
+        isFlipped = false;
 	}
 
     private void FixedUpdate()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
-
-        movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+        if (isFlipped)
+        {
+            movement = new Vector3(-moveHorizontal, 0.0f, -moveVertical);
+        }
+        else
+        {
+            movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+        }
         if (movement.magnitude > 1)
         {
             movement = movement.normalized;
@@ -91,5 +99,10 @@ public class PlayerMovement : MonoBehaviour {
     void UpdateDodgeSlider()
     {
         dodgeSlider.value = dodgeTimer;
+    }
+
+    public void Flip()
+    {
+        isFlipped = !isFlipped;
     }
 }

@@ -97,7 +97,10 @@ public class CharacterEquipment : MonoBehaviour {
     void ConvertToInteractable(Item item)
     {
         item.GetComponent<Rigidbody>().isKinematic = false;
-        item.GetComponent<Collider>().enabled = true;
+        foreach (Collider c in item.GetComponents<Collider>())
+        {
+            c.enabled = true;
+        }
         item.gameObject.layer = interactableLayer;
     }
 
@@ -108,7 +111,10 @@ public class CharacterEquipment : MonoBehaviour {
     void ConvertToEquipped(Item item)
     {
         item.GetComponent<Rigidbody>().isKinematic = true;
-        item.GetComponent<Collider>().enabled = false;
+        foreach (Collider c in item.GetComponents<Collider>())
+        {
+            c.enabled = false;
+        }
         item.gameObject.layer = dynamicLayer;
     }
 }
