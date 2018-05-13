@@ -2,21 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bomb : MonoBehaviour {
+public class Bomb : MonoBehaviour, IPooledObject
+{
 
     public float initialForce = 20f;
     public float explosionRadius = 2f;
     public float explosionForce = 10f;
     public int damage = 25;
+    public float ttl = 5f;
     public GameObject explosionEffect;
     private Rigidbody rb;
     private Vector3 lastPosition;
+    private ObjectPooler objectPooler;
 
-    // Use this for initialization
     private void Awake()
     {
-        lastPosition = transform.position;
         rb = GetComponent<Rigidbody>();
+    }
+
+    private void Start()
+    {
+        objectPooler = ObjectPooler.Instance;
     }
 
     private void OnTriggerStay(Collider other)
@@ -41,13 +47,14 @@ public class Bomb : MonoBehaviour {
 
     public void SetMultipliers(float forceMult, float damageMult)
     {
-        rb.velocity = this.transform.forward * initialForce * forceMult;
+        rb.velocity = transform.forward * initialForce * forceMult;
         damage = (int)(damage * damageMult);
     }
 
     void Explode()
     {
-        Instantiate(explosionEffect, transform.position, transform.rotation);
+        //Instantiate(explosionEffect, transform.position, transform.rotation);
+        objectPooler.SpawnFromPool("BombExplosion", transform.position, Quaternion.identity);
         Rigidbody colliderRB;
         CharacterHealth ch;
         Vector3 hitVector;
@@ -72,6 +79,22 @@ public class Bomb : MonoBehaviour {
                 ch.TakeDamage(Mathf.Max(1, (int)(damage * multiplier)));
             }
         }
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+    }
+
+    public void OnObjectSpawn()
+    {
+        lastPosition = transform.position;
+        Invoke("DeactivateObject", ttl);
+    }
+
+    private void OnDisable()
+    {
+        CancelInvoke("DeactivateObject");
+    }
+
+    void DeactivateObject()
+    {
+        gameObject.SetActive(false);
     }
 }

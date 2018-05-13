@@ -5,10 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    //public void PlayGame()
-    //{
-    //    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    //}
+    public void PlayGame(int sceneIndex)
+    {
+        PersistentObject.Instance.levelLoader.LoadLevel(sceneIndex);
+        transform.parent.gameObject.SetActive(false);
+    }
 
     public void QuitGame()
     {

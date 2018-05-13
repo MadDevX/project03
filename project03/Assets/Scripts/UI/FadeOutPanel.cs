@@ -19,9 +19,10 @@ public class FadeOutPanel : MonoBehaviour {
 
     IEnumerator FadePanel()
     {
+        img.enabled = true;
         float frequency = 1 / fadeOutFrames;
         Color c = img.color;
-        for (float f = c.a; f >= -frequency; f -= frequency)
+        for (float f = 1; f >= -frequency; f -= frequency)
         {
             if (f <= 0)
             {
@@ -33,6 +34,6 @@ public class FadeOutPanel : MonoBehaviour {
             img.color = c;
             yield return null;
         }
-        Destroy(gameObject);
+        img.enabled = false;
     }
 }

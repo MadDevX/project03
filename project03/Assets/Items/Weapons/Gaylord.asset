@@ -15,7 +15,6 @@ MonoBehaviour:
   description: Weapon of unfathomable power.
   forceMult: 2
   damageMult: 2
-  bulletTTL: 2.5
   reattackTime: 0.5
   effectsDuration: 0.1
   material: {fileID: 2100000, guid: 00bd607bdeb14af4b8165a0f5eb6a481, type: 2}

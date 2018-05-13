@@ -6,16 +6,16 @@
 
     public static class FaderAsync
     {
-        public static IEnumerator FadeIn(this Renderer r, float fadeIn)
+        public static IEnumerator FadeIn(this Renderer r, float fadeIn, float maxA = 1)
         {
             if (r == null) yield break;
             float frequency = 1 / fadeIn;
             Color c = r.material.color;
             for (float f = c.a; f <= 1 + frequency; f += frequency)
             {
-                if (f >= 1)
+                if (f >= maxA)
                 {
-                    c.a = 1;
+                    c.a = maxA;
                     r.material.color = c;
                     break;
                 }
@@ -25,16 +25,16 @@
             }
         }
 
-        public static IEnumerator FadeOut(this Renderer r, float fadeOut)
+        public static IEnumerator FadeOut(this Renderer r, float fadeOut, float minA = 0)
         {
             if (r == null) yield break;
             float frequency = 1 / fadeOut;
             Color c = r.material.color;
             for (float f = c.a; f >= -frequency; f -= frequency)
             {
-                if (f <= 0)
+                if (f <= minA)
                 {
-                    c.a = 0;
+                    c.a = minA;
                     r.material.color = c;
                     break;
                 }

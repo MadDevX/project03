@@ -9,6 +9,7 @@ public class Weapon : Item
     [SerializeField] private WeaponDetails stats;
 
     //Components and state variables
+    private ObjectPooler objectPooler;
     private Light shootingLight;
     private ParticleSystem particles;
     private AudioSource fireAudio;
@@ -41,6 +42,11 @@ public class Weapon : Item
         fireAudio = bulletSpawn.GetComponent<AudioSource>();
 	}
 
+    private void Start()
+    {
+        objectPooler = ObjectPooler.Instance;
+    }
+
     private void Update()
     {
         timer += Time.deltaTime;
@@ -68,10 +74,9 @@ public class Weapon : Item
         if (timer >= stats.reattackTime)
         {
             timer = 0f;
-            GameObject bullet = Instantiate(stats.bulletPrefab, bulletSpawn.position/*+bulletSpawn.transform.forward*stats.bulletPrefab.transform.localScale.z*/, bulletSpawn.rotation);
+            GameObject bullet = objectPooler.SpawnFromPool("Bomb", bulletSpawn.position, bulletSpawn.rotation);
             EnableEffects();
             bullet.GetComponent<Bomb>().SetMultipliers(stats.forceMult, stats.damageMult);
-            Destroy(bullet, stats.bulletTTL);
         }
     }
 

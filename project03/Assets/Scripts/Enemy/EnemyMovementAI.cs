@@ -105,6 +105,7 @@ public class EnemyMovementAI : MonoBehaviour {
     void TargetLost()
     {
         player = null;
+        nav.SetDestination(transform.position);
         enemyFire.TargetLost();
         agg.SetActive(false);
     }

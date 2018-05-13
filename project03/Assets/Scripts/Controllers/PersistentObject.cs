@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PersistentObjectScript : MonoBehaviour
+public class PersistentObject : MonoBehaviour
 {
 
-	void Awake ()
+    public static PersistentObject Instance;
+    public LevelLoader levelLoader;
+
+    void Awake()
     {
-        if(GameObject.FindGameObjectWithTag("PersistentObject")!=null)
+        if (GameObject.FindGameObjectWithTag("PersistentObject") != null)
         {
             Destroy(gameObject);
         }
         else
         {
             gameObject.tag = "PersistentObject";
+            Instance = this;
+            if(levelLoader==null)levelLoader = GetComponentInChildren<LevelLoader>();
             DontDestroyOnLoad(gameObject);
             SceneManager.LoadScene(1);
         }
-	}
-	
-	// Update is called once per frame
-	//void Update () {
-		
-	//}
+    }
 }

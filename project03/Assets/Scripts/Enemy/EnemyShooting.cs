@@ -12,6 +12,7 @@ public class EnemyShooting : MonoBehaviour {
     private NavMeshAgent nav;
     private float timer;
     private bool hasTarget = false;
+    private float attackFrequency = 0.15f;
 
 	// Use this for initialization
 	void Awake ()
@@ -24,22 +25,30 @@ public class EnemyShooting : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        bool noObstacle = true;
-        RaycastHit hit;
-        if (Physics.Linecast(equip.currentWeapon.bulletSpawn.position, nav.destination, out hit))
-        {
-            noObstacle = (hit.transform.tag.StartsWith("Character") || hit.transform.tag == "Player" || hit.transform.tag == "Projectile") && (hit.transform.tag != transform.tag);
-        }
-        Vector3 distance = nav.destination - equip.currentWeapon.transform.position;
-        if (equip.currentWeapon != null && hasTarget && noObstacle && distance.magnitude<range && timer >= fireDelay)
-        {
-            equip.currentWeapon.Shoot();
-        }
-        else
-        {
-            timer += Time.deltaTime;
-        }
+        timer += Time.deltaTime;
 	}
+
+    /// <summary>
+    /// Checks for collision and attacks found target using equipped weapon.
+    /// </summary>
+    IEnumerator Attack()
+    {
+        while (hasTarget)
+        {
+            bool noObstacle = true;
+            RaycastHit hit;
+            if (Physics.Linecast(equip.currentWeapon.bulletSpawn.position, nav.destination, out hit))
+            {
+                noObstacle = (hit.transform.tag.StartsWith("Character") || hit.transform.tag == "Player" || hit.transform.tag == "Projectile") && (hit.transform.tag != transform.tag);
+            }
+            Vector3 distance = nav.destination - equip.currentWeapon.transform.position;
+            if (equip.currentWeapon != null && noObstacle && distance.magnitude < range && timer >= fireDelay)
+            {
+                equip.currentWeapon.Shoot();
+            }
+            yield return new WaitForSeconds(attackFrequency);
+        }
+    }
 
     /// <summary>
     /// Sets hasTarget to true and resets character's shooting delay timer
@@ -47,6 +56,7 @@ public class EnemyShooting : MonoBehaviour {
     public void TargetFound()
     {
         hasTarget = true;
+        StartCoroutine("Attack");
         timer = 0f;
     }
 
@@ -56,5 +66,6 @@ public class EnemyShooting : MonoBehaviour {
     public void TargetLost()
     {
         hasTarget = false;
+        StopAllCoroutines();
     }
 }

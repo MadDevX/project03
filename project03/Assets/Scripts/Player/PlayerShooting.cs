@@ -18,14 +18,6 @@ public class PlayerShooting : MonoBehaviour
         {
             equip.currentWeapon.Shoot();
         }
-        //if(Input.GetKeyDown(KeyCode.R))
-        //{
-        //    Time.timeScale = .05f;
-        //}
-        //if(Input.GetKeyUp(KeyCode.R))
-        //{
-        //    Time.timeScale = 1f;
-        //}
     }
 
 

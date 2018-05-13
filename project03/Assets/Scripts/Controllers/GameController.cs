@@ -45,6 +45,7 @@ public class GameController : MonoBehaviour {
 
     public void GameOver()
     {
-        SceneManager.LoadScene(1);
+        PersistentObject.Instance.levelLoader.LoadLevel(1);
+        gameOverScreen.SetActive(false);
     }
 }

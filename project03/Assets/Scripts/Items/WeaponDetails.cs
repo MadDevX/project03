@@ -9,7 +9,6 @@ public class WeaponDetails : ScriptableObject
     public string description;
     public float forceMult = 1f;
     public float damageMult = 1f;
-    public float bulletTTL = 5f;
     public float reattackTime = 1f;
     public float effectsDuration = 0.05f;
 

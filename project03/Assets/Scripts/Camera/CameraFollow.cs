@@ -9,6 +9,7 @@ public class CameraFollow : MonoBehaviour
     public float maxCameraDrift = 15f;
     public float lerpFactor;
     public float rotateSpeed = 100f;
+    public float fadeAlpha = 0.1f;
     public int fadeoutFrames = 15;
     [SerializeField] private Transform player;
 
@@ -96,7 +97,7 @@ public class CameraFollow : MonoBehaviour
                 MeshRenderer toFade = hit.transform.GetComponent<MeshRenderer>();
                 if (fadingOut != toFade)
                 {
-                    StartCoroutine(toFade.FadeOut(fadeoutFrames));
+                    StartCoroutine(toFade.FadeOut(fadeoutFrames, fadeAlpha));
                     StartCoroutine(fadingOut.FadeIn(fadeoutFrames));
                     fadingOut = toFade;
                 }
