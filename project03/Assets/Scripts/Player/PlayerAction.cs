@@ -36,18 +36,6 @@ public class PlayerAction : MonoBehaviour {
         #endregion
     }
 
-    void Update ()
-    {
-		if(Input.GetKeyUp(KeyCode.E))
-        {
-            InteractWith();
-        }
-        if(Input.GetKeyDown(KeyCode.T))
-        {
-            equip.DetachWeapon();
-        }
-	}
-
     IEnumerator Fade()
     {
         for (float f = 1f; f >= -2f/interactionLingerFrames; f -= 1f/interactionLingerFrames)
@@ -71,7 +59,7 @@ public class PlayerAction : MonoBehaviour {
     /// <summary>
     /// Checks if cursor is currently over an interactable objects and interacts if object was found.
     /// </summary>
-    void InteractWith()
+    public void InteractWith()
     {
         if(activeObject!=null)
         {
@@ -83,6 +71,11 @@ public class PlayerAction : MonoBehaviour {
             StopCoroutine("Fade");
             StartCoroutine("Fade");
         }
+    }
+
+    public void DetachWeapon()
+    {
+        equip.DetachWeapon();
     }
 
     IEnumerator HighlightInteractable()

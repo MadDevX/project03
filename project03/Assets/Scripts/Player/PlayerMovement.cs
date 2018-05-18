@@ -36,6 +36,14 @@ public class PlayerMovement : MonoBehaviour {
         isFlipped = false;
 	}
 
+    private void Start()
+    {
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main;
+        }
+    }
+
     private void FixedUpdate()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
@@ -59,10 +67,6 @@ public class PlayerMovement : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        if (movement.magnitude!=0 && Input.GetButton("Jump") && dodgeTimer >= dodgeReset)
-        {
-            Dodge();
-        }
         dodgeTimer += Time.deltaTime;
         if (dodgeSlider != null)
         {
@@ -76,10 +80,13 @@ public class PlayerMovement : MonoBehaviour {
         rb.MovePosition(rb.position + translationVector);
     }
 
-    void Dodge()
+    public void Dodge()
     {
-            rb.velocity = movement.normalized * speed*10/6;
+        if (movement.magnitude != 0 && dodgeTimer >= dodgeReset)
+        {
+            rb.velocity = movement.normalized * speed * 10 / 6;
             dodgeTimer = 0f;
+        }
     }
 
     void Rotate()

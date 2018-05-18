@@ -8,8 +8,9 @@ public class PauseMenu : MonoBehaviour {
     public static bool GameIsPaused = false;
 
     public GameObject pauseMenuUI;
-	
-	void Update ()
+    public GameObject gameUI;
+
+    void Update ()
     {
         if(LevelLoader.CurrentScene<=1 && GameIsPaused)
         {
@@ -45,5 +46,13 @@ public class PauseMenu : MonoBehaviour {
         Time.timeScale = 0f;
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
         GameIsPaused = true;
+    }
+
+    public void ReturnToMenu()
+    {
+        pauseMenuUI.SetActive(false);
+        gameUI.SetActive(false);
+        LevelLoader.Instance.LoadLevel(1);
+        GameIsPaused = false;
     }
 }

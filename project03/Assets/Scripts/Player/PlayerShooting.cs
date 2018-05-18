@@ -11,10 +11,10 @@ public class PlayerShooting : MonoBehaviour
     {
         equip = GetComponent<CharacterEquipment>();
 	}
-    // Update is called once per frame
-    void Update ()
+
+    public void UseWeapon()
     {
-        if (equip.currentWeapon!=null && Input.GetButton("Fire1"))
+        if (equip.currentWeapon != null)
         {
             equip.currentWeapon.Shoot();
         }

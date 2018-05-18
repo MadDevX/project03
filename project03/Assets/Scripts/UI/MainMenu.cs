@@ -7,7 +7,7 @@ public class MainMenu : MonoBehaviour
 {
     public void PlayGame(int sceneIndex)
     {
-        PersistentObject.Instance.levelLoader.LoadLevel(sceneIndex);
+        LevelLoader.Instance.LoadLevel(sceneIndex);
         transform.parent.gameObject.SetActive(false);
     }
 

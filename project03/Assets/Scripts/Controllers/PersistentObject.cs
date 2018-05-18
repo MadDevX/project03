@@ -7,7 +7,7 @@ public class PersistentObject : MonoBehaviour
 {
 
     public static PersistentObject Instance;
-    public LevelLoader levelLoader;
+    private LevelLoader levelLoader;
 
     void Awake()
     {

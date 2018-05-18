@@ -6,9 +6,19 @@ using UnityEngine.UI;
 
 public class LevelLoader : MonoBehaviour
 {
-    public GameObject loadingScreen;
-    public Slider slider;
+    [SerializeField] GameObject loadingScreen;
+    [SerializeField] Slider slider;
+    [SerializeField] Text progressText;
     public static int CurrentScene { get; private set; }
+
+    #region Singleton
+    public static LevelLoader Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+    #endregion
 
     public void LoadLevel(int sceneIndex)
     {
@@ -25,6 +35,7 @@ public class LevelLoader : MonoBehaviour
         {
             float progress = Mathf.Clamp01(operation.progress / 0.9f);
             slider.value = progress;
+            progressText.text = progress * 100f + "%";
             yield return null;
         }
         loadingScreen.SetActive(false);
