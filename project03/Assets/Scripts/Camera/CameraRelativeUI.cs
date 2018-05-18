@@ -6,7 +6,7 @@ public class CameraRelativeUI : MonoBehaviour
 {
     private RectTransform rectTransform;
     private Vector3 cameraForward;
-    private void Start()
+    private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         cameraForward = Vector3.zero;

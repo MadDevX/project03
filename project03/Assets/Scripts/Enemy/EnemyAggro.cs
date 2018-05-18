@@ -8,8 +8,4 @@ public class EnemyAggro : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-    public void SetActive(bool active)
-    {
-        gameObject.SetActive(active);
-    }
 }

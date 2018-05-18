@@ -21,7 +21,6 @@ public class PlayerMovement : MonoBehaviour {
     private float timer;
     private float dodgeTimer;
     private bool isFlipped;
-    //private Vector3 dodgeDir;
 
     // Use this for initialization
     void Awake()

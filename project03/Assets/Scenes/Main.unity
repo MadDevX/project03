@@ -557,7 +557,8 @@ AudioSource:
   m_GameObject: {fileID: 345222967}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 243589541500558452, guid: a02a07968c1946c4b86bc60c101bc1c3,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: f30874a586a25054597a48d37d66dd55, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.4
@@ -3444,6 +3445,7 @@ MonoBehaviour:
   maxCameraDrift: 5
   lerpFactor: 0.2
   rotateSpeed: 100
+  fadeAlpha: 0.1
   fadeoutFrames: 20
   player: {fileID: 2058062993}
   offset: {x: 0, y: 15, z: -14}
@@ -6146,6 +6148,11 @@ Prefab:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 96835961160685398, guid: 924e803c46aed7540a003c1a54cef786,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a1149f292c291c543be295b36ea3b2b9, type: 2}
+    - target: {fileID: 212440040607409120, guid: 924e803c46aed7540a003c1a54cef786,
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 

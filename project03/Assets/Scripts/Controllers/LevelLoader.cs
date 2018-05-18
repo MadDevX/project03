@@ -8,6 +8,7 @@ public class LevelLoader : MonoBehaviour
 {
     public GameObject loadingScreen;
     public Slider slider;
+    public static int CurrentScene { get; private set; }
 
     public void LoadLevel(int sceneIndex)
     {
@@ -27,6 +28,7 @@ public class LevelLoader : MonoBehaviour
             yield return null;
         }
         loadingScreen.SetActive(false);
+        CurrentScene = sceneIndex;
         yield break;
     }
 }

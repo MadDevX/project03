@@ -21,7 +21,7 @@ public class WeaponDetails : ScriptableObject
         Weapon wep = Instantiate(weaponModel).GetComponent<Weapon>();
         if(wep==null)
         {
-            Debug.Log("INCOMPATIBLE WEAPON MODEL");
+            Debug.LogWarning("INCOMPATIBLE WEAPON MODEL");
             return null;
         }
         wep.Stats = this;

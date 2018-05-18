@@ -50,7 +50,7 @@ public class EnemyMovementAI : MonoBehaviour {
             {
                 player = col.transform;
                 enemyFire.TargetFound();
-                agg.SetActive(true);
+                agg.gameObject.SetActive(true);
                 targetFound = true;
                 break;
             }
@@ -107,6 +107,6 @@ public class EnemyMovementAI : MonoBehaviour {
         player = null;
         nav.SetDestination(transform.position);
         enemyFire.TargetLost();
-        agg.SetActive(false);
+        agg.gameObject.SetActive(false);
     }
 }

@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 222937178893651912}
   - component: {fileID: 114946202312212534}
   - component: {fileID: 114105389956093472}
+  - component: {fileID: 225967127804158804}
   m_Layer: 5
   m_Name: FadeOutPanel
   m_TagString: Untagged
@@ -92,3 +93,14 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &225967127804158804
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1859473460175358}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0

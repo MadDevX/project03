@@ -5,13 +5,8 @@ using UnityEngine;
 public class GetObjectRotation : MonoBehaviour {
 
     public Transform player;
-	// Use this for initialization
-	void Start ()
-    {
-		
-	}
-	
-	// Update is called once per frame
+
+	//Minimap Player rotation indicator
 	void LateUpdate ()
     {
         if (player != null)

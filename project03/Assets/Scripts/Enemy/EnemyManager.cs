@@ -10,12 +10,16 @@ public class EnemyManager : MonoBehaviour, ICharacterManager
 
     private void Awake()
     {
-        gc = FindObjectOfType<GameController>();
         equip = GetComponent<CharacterEquipment>();
         if(equip.currentWeapon==null)
         {
             equip.EquipItem(details[Random.Range(0, details.Count)].CreateWeapon());
         }
+    }
+
+    private void Start()
+    {
+        gc = FindObjectOfType<GameController>();
     }
 
     public void OnDeath()

@@ -13,15 +13,19 @@ public class PlayerAction : MonoBehaviour {
     private int interactableMask;
     private CharacterEquipment equip;
     private IInteractable activeObject;
-	// Use this for initialization
-	void Start ()
+
+    private void Awake()
+    {
+        equip = GetComponent<CharacterEquipment>();
+    }
+
+    void Start()
     {
         if (mainCamera == null)
         {
             mainCamera = Camera.main;
         }
         interactableMask = LayerMask.GetMask("Interactable");
-        equip = GetComponent<CharacterEquipment>();
         interactionRenderer.transform.localScale = new Vector3(interactionRange, interactionRange, 0);
         activeObject = null;
         StartCoroutine(HighlightInteractable());
@@ -32,7 +36,6 @@ public class PlayerAction : MonoBehaviour {
         #endregion
     }
 
-    // Update is called once per frame
     void Update ()
     {
 		if(Input.GetKeyUp(KeyCode.E))

@@ -6,8 +6,8 @@ public class FadeOutPanel : MonoBehaviour {
 
     public float fadeOutFrames = 200;
     private Image img;
-	// Use this for initialization
-	void Start ()
+
+	void Awake ()
     {
         img = GetComponent<Image>();
         if(img!=null)

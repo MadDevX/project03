@@ -28,11 +28,6 @@ public class CharacterEquipment : MonoBehaviour {
         interactableLayer = LayerMask.NameToLayer("Interactable");
         dynamicLayer = LayerMask.NameToLayer("Dynamic");
     }
-    // Update is called once per frame
-    void Update ()
-    {
-		
-	}
 
     public void EquipItem(Item item)
     {

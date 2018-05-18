@@ -90,7 +90,7 @@ public class CameraFollow : MonoBehaviour
     {
         RaycastHit hit;
         MeshRenderer fadingOut = null;
-        while (player.transform)
+        while (player)
         {
             if (Physics.Raycast(transform.position, player.position-transform.position, out hit, maxDistance, fadingMask))
             {

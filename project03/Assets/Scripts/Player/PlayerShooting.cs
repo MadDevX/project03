@@ -19,6 +19,4 @@ public class PlayerShooting : MonoBehaviour
             equip.currentWeapon.Shoot();
         }
     }
-
-
 }

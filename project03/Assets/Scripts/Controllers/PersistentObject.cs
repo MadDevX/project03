@@ -11,7 +11,7 @@ public class PersistentObject : MonoBehaviour
 
     void Awake()
     {
-        if (GameObject.FindGameObjectWithTag("PersistentObject") != null)
+        if (Instance!=null)
         {
             Destroy(gameObject);
         }
