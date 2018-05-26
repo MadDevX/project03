@@ -11,26 +11,28 @@ public class CameraFollow : MonoBehaviour
     public float rotateSpeed = 100f;
     public float fadeAlpha = 0.1f;
     public int fadeoutFrames = 15;
-    [SerializeField] private Transform player;
 
+    [SerializeField] private Transform target;
     [SerializeField] private Vector3 offset;
+    private AudioListener cameraListener;
     private Vector3 startPosition;
     private PlayerMovement playerControls;
     private int fadingMask;
     private int groundMask;
-    private float rotateInput;
+    //private float rotateInput;
 
-    public Transform Player
+    public Transform Target
     {
         get
         {
-            return player;
+            return target;
         }
 
         set
         {
-            player = value;
-            playerControls = player.GetComponent<PlayerMovement>();
+            StopCoroutine("CheckObstacles");
+            target = value;
+            playerControls = target.GetComponent<PlayerMovement>();
             StartCoroutine(CheckObstacles());
         }
     }
@@ -39,15 +41,16 @@ public class CameraFollow : MonoBehaviour
 	void Start ()
     {
         startPosition = transform.position;
+        cameraListener = GetComponentInChildren<AudioListener>();
+        cameraListener.transform.SetPositionAndRotation(transform.position - offset, Quaternion.LookRotation(Vector3.forward, Vector3.up));
         fadingMask = LayerMask.GetMask("Fading");
         groundMask = LayerMask.GetMask("Ground");
         StartCoroutine(CheckObstacles());
-        playerControls = player.GetComponent<PlayerMovement>();
+        playerControls = Target.GetComponent<PlayerMovement>();
 	}
 
     private void Update()
     {
-        //rotateInput = Input.GetAxis("Rotate") * rotateSpeed * Time.deltaTime;
         if(Input.GetButtonDown("Flip"))
         {
             StartCoroutine("FlipCamera");
@@ -58,25 +61,25 @@ public class CameraFollow : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate ()
     {
-        if (player != null)
+        if (Target != null)
         {
             Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(camRay, out hit, maxDistance, groundMask))
             {
-                Vector3 targetPosition = (2*player.position + hit.point)/3;
+                Vector3 targetPosition = (2.0f*Target.position + hit.point)/3.0f;
                 float f;
-                if((f=(targetPosition-player.position).magnitude)>maxCameraDrift)
+                if((f=(targetPosition-Target.position).magnitude)>maxCameraDrift)
                 {
-                    targetPosition += (player.position - targetPosition).normalized * (f - maxCameraDrift);
+                    targetPosition += (Target.position - targetPosition).normalized * (f - maxCameraDrift);
                 }
-                targetPosition.y = 0;
+                targetPosition.y = 0f;
                 transform.position = Vector3.Lerp(transform.position, targetPosition + offset, lerpFactor);
             }
             else
             {
                 
-                transform.position = Vector3.Lerp(transform.position, player.position + offset, lerpFactor);
+                transform.position = Vector3.Lerp(transform.position, Target.position + offset, lerpFactor);
             }
         }
         else
@@ -86,13 +89,14 @@ public class CameraFollow : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(-offset, Vector3.up), lerpFactor);
     }
 
+    //DO ZMIANY
     IEnumerator CheckObstacles()
     {
         RaycastHit hit;
         MeshRenderer fadingOut = null;
-        while (player)
+        while (Target)
         {
-            if (Physics.Raycast(transform.position, player.position-transform.position, out hit, maxDistance, fadingMask))
+            if (Physics.Raycast(transform.position, Target.position-transform.position, out hit, maxDistance, fadingMask))
             {
                 MeshRenderer toFade = hit.transform.GetComponent<MeshRenderer>();
                 if (fadingOut != toFade)
@@ -109,6 +113,7 @@ public class CameraFollow : MonoBehaviour
             }
             yield return new WaitForSeconds(.2f);
         }
+
     }
 
     IEnumerator FlipCamera()

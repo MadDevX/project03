@@ -6,110 +6,65 @@ using Enums;
 
 public class CharacterEquipment : MonoBehaviour {
 
-    [HideInInspector] public Weapon currentWeapon;
-    [SerializeField] private Vector3 weaponAttach;
-    [SerializeField] private Vector3 weaponRotation;
-    [SerializeField] private Vector3 armorAttach;
-    [SerializeField] private Vector3 armorRotation;
-    [SerializeField] private Vector3 accessoryAttach;
-    [SerializeField] private Vector3 accessoryRotation;
-    private int interactableLayer;
-    private int dynamicLayer;
+
+    [System.Serializable]
+    public class AttachmentPoint
+    {
+        public EquipmentType type;
+        public Vector3 position;
+        public Vector3 rotation;
+        public IEquipment currentItem;
+    }
+
+    public List<AttachmentPoint> attachmentPoints;
+    private EquipmentDetails[] currentEquipment;
+    private CharacterInventory inventory;
 
     
 	// Use this for initialization
 	void Awake ()
     {
-        currentWeapon = GetComponentInChildren<Weapon>();
+        int numSlots = System.Enum.GetNames(typeof(EquipmentType)).Length;
+        currentEquipment = new EquipmentDetails[numSlots];
+        inventory = GetComponent<CharacterInventory>();
 	}
 
-    void Start()
+    public void EquipItem(EquipmentDetails item)
     {
-        interactableLayer = LayerMask.NameToLayer("Interactable");
-        dynamicLayer = LayerMask.NameToLayer("Dynamic");
-    }
-
-    public void EquipItem(Item item)
-    {
-        switch(item.itemType)
+        if(currentEquipment[(int)item.type]!=null)
         {
-            case ItemType.Weapon:
-                {
-                    EquipWeapon(item);
-                }
-                break;
-            default:
-                break;
+            inventory.Add(currentEquipment[(int)item.type]);
         }
-    }
-
-
-
-    //DO POSZCZEGOLNYCH TYPOW ITEMOW
-    void EquipWeapon(Item item)
-    {
-        DetachWeapon(item);
-        AttachItem(item, weaponAttach, weaponRotation);
-        ConvertToEquipped(item);
-        currentWeapon = item.GetComponent<Weapon>();
-        if (tag == "Player")
+        currentEquipment[(int)item.type] = item;
+        inventory.Remove(item);
+        foreach(AttachmentPoint p in attachmentPoints)
         {
-            item.gameObject.FindComponentInChildWithTag<LineRenderer>("BulletSpawn").enabled = true;
-        }
-    }
-
-    /// <summary>
-    /// Detaches weapon from character. If item is not null, the transforms of the current weapon and the item shall be swapped.
-    /// </summary>
-    /// <param name="item"></param>
-    public void DetachWeapon(Item item=null)
-    {
-        if (currentWeapon != null)
-        {
-            currentWeapon.transform.parent = null;
-            if (item != null)
+            if(p.type==item.type)
             {
-                currentWeapon.transform.position = item.transform.position + Vector3.up * .2f;
-                currentWeapon.transform.rotation = item.transform.rotation;
+                if(p.currentItem!=null)
+                {
+                    p.currentItem.Remove();
+                }
+                GameObject model = item.CreateEquipped(out p.currentItem);
+                AttachModel(model, p.position, p.rotation);
+                break;
             }
-            ConvertToInteractable(currentWeapon);
-            currentWeapon.gameObject.FindComponentInChildWithTag<LineRenderer>("BulletSpawn").enabled = false;
-            currentWeapon = null;
         }
     }
-
-    void AttachItem(Item item, Vector3 attachPosition, Vector3 attachRotation)
+    
+    void AttachModel(GameObject item, Vector3 attachPosition, Vector3 attachRotation)
     {
         item.transform.parent = transform;
         item.transform.localPosition = attachPosition;
         item.transform.localRotation = Quaternion.Euler(attachRotation);
     }
 
-    /// <summary>
-    /// Sets properties of an item to match those of an interactable objects: enables physics and sets appropriate layer.
-    /// </summary>
-    /// <param name="item"></param>
-    void ConvertToInteractable(Item item)
+    public void UseWeapon()
     {
-        item.GetComponent<Rigidbody>().isKinematic = false;
-        foreach (Collider c in item.GetComponents<Collider>())
+        IEquipment weapon = attachmentPoints[(int)EquipmentType.Weapon].currentItem;
+        if (weapon != null)
         {
-            c.enabled = true;
+            weapon.Use();
         }
-        item.gameObject.layer = interactableLayer;
-    }
-
-    /// <summary>
-    /// Sets properties of an item preventing it from being interacted with: disables physics and sets appropriate layer.
-    /// </summary>
-    /// <param name="item"></param>
-    void ConvertToEquipped(Item item)
-    {
-        item.GetComponent<Rigidbody>().isKinematic = true;
-        foreach (Collider c in item.GetComponents<Collider>())
-        {
-            c.enabled = false;
-        }
-        item.gameObject.layer = dynamicLayer;
     }
 }

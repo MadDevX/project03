@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Bomb : MonoBehaviour, IPooledObject
 {
+    [SerializeField] private AmmunitionDetails ammoDetails;
 
-    public float initialForce = 20f;
-    public float explosionRadius = 2f;
-    public float explosionForce = 10f;
-    public int damage = 25;
-    public float ttl = 5f;
-    public GameObject explosionEffect;
     private Rigidbody rb;
     private Vector3 lastPosition;
     private ObjectPooler objectPooler;
+
+    private float shootingForce;
+    private float explosionRadius;
+    private float explosionForce;
+    private float damage;
 
     private void Awake()
     {
@@ -23,6 +23,12 @@ public class Bomb : MonoBehaviour, IPooledObject
     private void Start()
     {
         objectPooler = ObjectPooler.Instance;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        transform.position = lastPosition;
+        Explode();
     }
 
     private void OnTriggerStay(Collider other)
@@ -45,18 +51,19 @@ public class Bomb : MonoBehaviour, IPooledObject
         lastPosition = transform.position;
     }
 
-    public void SetMultipliers(float forceMult, float damageMult)
+    public void SetMultipliers(float forceMult=1, float damageMult=1, float radiusMult=1, float explosionForceMult=1)
     {
-        rb.velocity = transform.forward * initialForce * forceMult;
-        damage = (int)(damage * damageMult);
+        rb.velocity = transform.forward * ammoDetails.baseShootingForce * forceMult;
+        damage = (int)(ammoDetails.baseDamage * damageMult);
+        explosionRadius = ammoDetails.baseExplosionRadius * radiusMult;
+        explosionForce = ammoDetails.baseExplosionForce * explosionForceMult;
     }
 
     void Explode()
     {
-        //Instantiate(explosionEffect, transform.position, transform.rotation);
-        objectPooler.SpawnFromPool("BombExplosion", transform.position, Quaternion.identity);
+        objectPooler.SpawnFromPool(ammoDetails.hitEffectPrefab, transform.position, Quaternion.identity);
         Rigidbody colliderRB;
-        CharacterHealth ch;
+        CharacterStats ch;
         Vector3 hitVector;
         float calcForce;
         Collider[] collidersHit = Physics.OverlapSphere(transform.position, explosionRadius);
@@ -70,9 +77,8 @@ public class Bomb : MonoBehaviour, IPooledObject
                 calcForce = (explosionRadius - hitVector.magnitude) * explosionForce;
                 hitVector = hitVector.normalized * calcForce;
                 colliderRB.AddForce(hitVector, ForceMode.Impulse);
-                colliderRB.AddExplosionForce(explosionForce, transform.position, explosionRadius);
             }
-            ch = c.GetComponent<CharacterHealth>();
+            ch = c.GetComponent<CharacterStats>();
             if (ch!=null)
             {
                 float multiplier = (explosionRadius - (c.transform.position - transform.position).magnitude)/explosionRadius;
@@ -85,7 +91,7 @@ public class Bomb : MonoBehaviour, IPooledObject
     public void OnObjectSpawn()
     {
         lastPosition = transform.position;
-        Invoke("DeactivateObject", ttl);
+        Invoke("DeactivateObject", ammoDetails.ttl);
     }
 
     private void OnDisable()

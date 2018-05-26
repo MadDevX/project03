@@ -9,7 +9,7 @@ public interface IInteractable
     /// </summary>
     /// <param name="equip">Reference to character's equipment component.</param>
     /// <returns>True if interaction was a success.</returns>
-    bool Interact(CharacterEquipment equip);
+    bool Interact(GameObject actor);
     void Highlight();
     void StopHighlight();
 }

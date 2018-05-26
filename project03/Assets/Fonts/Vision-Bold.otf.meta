@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: d849eb0c83aaec144b2ed5665156883a
+timeCreated: 1527087094
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Vision
+  fontNames:
+  - Vision
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 404d921044109884ca5eed2d03b2a684, type: 3}
+  - {fileID: 12800000, guid: 5ee62a60c53c6c348aeb50cb302a0af2, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

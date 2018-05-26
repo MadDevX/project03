@@ -17,6 +17,5 @@ public class CameraRelativeUI : MonoBehaviour
         cameraForward = Camera.main.transform.forward;
         cameraForward.y = 0;
         rectTransform.SetPositionAndRotation(rectTransform.position, Quaternion.LookRotation(Vector3.down, cameraForward));
-        //rectTransform.rotation = Quaternion.LookRotation(Vector3.down, cameraForward);
     }
 }

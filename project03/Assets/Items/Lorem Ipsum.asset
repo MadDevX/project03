@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ff1468e17fefc64c82edc2e3223efd4, type: 3}
+  m_Name: Lorem Ipsum
+  m_EditorClassIdentifier: 
+  name: Book
+  description: '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+    fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+    culpa qui officia deserunt mollit anim id est laborum."'
+  icon: {fileID: 21300000, guid: 14a30e668006aa14f92003524e6667f7, type: 3}
+  material: {fileID: 2100000, guid: ce4b77858ec6c0f469b07b034c21a85f, type: 2}
+  itemModel: {fileID: 1107646917241542, guid: 5ddb8c814da2f04428b91f5c823652ac, type: 2}

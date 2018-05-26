@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Helper;
+using Enums;
 
 public class EnemyMovementAI : MonoBehaviour {
 
@@ -15,6 +16,7 @@ public class EnemyMovementAI : MonoBehaviour {
     private Transform player;
     private CharacterEquipment equip;
     private EnemyAggro agg;
+    private Vector3 weaponOffset;
 
 	// Use this for initialization
 	void Awake ()
@@ -23,6 +25,13 @@ public class EnemyMovementAI : MonoBehaviour {
         enemyFire = GetComponent<EnemyShooting>();
         nav = GetComponent<NavMeshAgent>();
         equip = GetComponentInChildren<CharacterEquipment>();
+        foreach(CharacterEquipment.AttachmentPoint ap in equip.attachmentPoints)
+        {
+            if(ap.type==EquipmentType.Weapon)
+            {
+                weaponOffset = ap.position;
+            }
+        }
 	}
 
     private void Start()
@@ -87,14 +96,7 @@ public class EnemyMovementAI : MonoBehaviour {
         {
             Vector3 startVector;
             nav.SetDestination(player.position);
-            if(equip.currentWeapon!=null)
-            {
-                startVector = equip.currentWeapon.transform.position;
-            }
-            else
-            {
-                startVector = transform.position;
-            }
+            startVector = transform.position + transform.rotation * weaponOffset;
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(player.position - startVector), slerpFactor);
         }
     }

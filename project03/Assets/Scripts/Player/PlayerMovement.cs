@@ -60,8 +60,6 @@ public class PlayerMovement : MonoBehaviour {
         {
             movement = movement.normalized;
         }
-        Move();
-        Rotate();
     }
 
     // Update is called once per frame
@@ -74,10 +72,11 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    void Move()
+    public void Move()
     {
         Vector3 translationVector = movement * speed * Time.deltaTime;
         rb.MovePosition(rb.position + translationVector);
+        //Debug.Log(rb.velocity.ToString());    
     }
 
     public void Dodge()
@@ -89,7 +88,7 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    void Rotate()
+    public void Rotate()
     {
         Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit groundHit;

@@ -33,9 +33,9 @@ public class MinimapFollow : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (player != null)
+        if (Player != null)
         {
-            transform.position = Vector3.Lerp(transform.position, player.position + offset, lerpFactor);
+            transform.position = Vector3.Lerp(transform.position, Player.position + offset, lerpFactor);
         }
         else
         {

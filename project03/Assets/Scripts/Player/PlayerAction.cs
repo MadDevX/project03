@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Helper;
+using UnityEngine.EventSystems;
 
 public class PlayerAction : MonoBehaviour {
 
@@ -11,12 +12,31 @@ public class PlayerAction : MonoBehaviour {
     public float interactionRange = 3f;
     public int interactionLingerFrames = 20;
     private int interactableMask;
-    private CharacterEquipment equip;
     private IInteractable activeObject;
 
-    private void Awake()
+    private IInteractable ActiveObject
     {
-        equip = GetComponent<CharacterEquipment>();
+        get
+        {
+            return activeObject;
+        }
+
+        set
+        {
+            if (activeObject != null)
+            {
+                activeObject.StopHighlight();
+            }
+            if(!EventSystem.current.IsPointerOverGameObject())
+            {
+                DescriptionPanel.Instance.HidePanel();
+            }
+            activeObject = value;
+            if (activeObject != null)
+            {
+                activeObject.Highlight();
+            }
+        }
     }
 
     void Start()
@@ -27,7 +47,7 @@ public class PlayerAction : MonoBehaviour {
         }
         interactableMask = LayerMask.GetMask("Interactable");
         interactionRenderer.transform.localScale = new Vector3(interactionRange, interactionRange, 0);
-        activeObject = null;
+        ActiveObject = null;
         StartCoroutine(HighlightInteractable());
         #region DEBUG COLOR
         Color c = interactionRenderer.color;
@@ -61,21 +81,18 @@ public class PlayerAction : MonoBehaviour {
     /// </summary>
     public void InteractWith()
     {
-        if(activeObject!=null)
+        if(ActiveObject!=null)
         {
-            activeObject.StopHighlight();
-            activeObject.Interact(equip);
+            if(ActiveObject.Interact(gameObject))
+            {
+                ActiveObject = null;
+            }
         }
         else
         {
             StopCoroutine("Fade");
             StartCoroutine("Fade");
         }
-    }
-
-    public void DetachWeapon()
-    {
-        equip.DetachWeapon();
     }
 
     IEnumerator HighlightInteractable()
@@ -88,30 +105,14 @@ public class PlayerAction : MonoBehaviour {
             if (hit.transform && ((hit.transform.position - transform.position).magnitude <= interactionRange))
             {
                 IInteractable newInteractable = hit.transform.GetComponent<IInteractable>();
-                if (newInteractable != null)
+                if(ActiveObject!=newInteractable)
                 {
-                    if (activeObject == null)
-                    {
-                        activeObject = newInteractable;
-                        activeObject.Highlight();
-                    }
-                    else if(activeObject!=newInteractable)
-                    {
-                            activeObject.StopHighlight();
-                            activeObject = newInteractable;
-                            activeObject.Highlight();
-                    }
-                }
-                else
-                {
-                    activeObject.StopHighlight();
-                    activeObject = null;
+                    ActiveObject = newInteractable;
                 }
             }
-            else if(activeObject!=null)
+            else
             {
-                activeObject.StopHighlight();
-                activeObject = null;
+                ActiveObject = null;
             }
             yield return new WaitForSeconds(.1f);
         }

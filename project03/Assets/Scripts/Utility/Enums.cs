@@ -1,9 +1,17 @@
 ﻿namespace Enums
 {
-    public enum ItemType
+    public enum EquipmentType
     {
         Weapon,
         Armor,
         Accessory
     }
+
+    //public enum EquipmentSlot
+    //{
+    //    Weapon,
+    //    Armor,
+    //    Accessory,
+    //}
+
 }

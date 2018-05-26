@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour, ICharacterManager
 {
-    public List<WeaponDetails> details;
+    public List<WeaponDetails> weaponPool;
     private GameController gc;
     private CharacterEquipment equip;
+    private CharacterInventory inv;
 
     private void Awake()
     {
         equip = GetComponent<CharacterEquipment>();
-        if(equip.currentWeapon==null)
-        {
-            equip.EquipItem(details[Random.Range(0, details.Count)].CreateWeapon());
-        }
+        inv = GetComponent<CharacterInventory>();
+        WeaponDetails curWep = weaponPool[Random.Range(0, weaponPool.Count)];
+        inv.Add(curWep);
+        equip.EquipItem(curWep);
+        
     }
 
     private void Start()
@@ -24,9 +26,13 @@ public class EnemyManager : MonoBehaviour, ICharacterManager
 
     public void OnDeath()
     {
-        if (Random.Range(.0f, 1.0f) >= .5f)
+        foreach (ItemDetails item in inv.items)
         {
-            equip.DetachWeapon();
+            if (Random.Range(.0f, 1.0f) >= .5f)
+            {
+                GameObject dropped = item.CreatePickup();
+                dropped.transform.position = transform.position;
+            }
         }
         gc.EnemyKilled();
     }

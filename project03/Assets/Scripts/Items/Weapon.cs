@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using Helper;
 
-public class Weapon : Item
+public class Weapon : MonoBehaviour, IEquipment
 {
-    //Weapon Data
     [SerializeField] private WeaponDetails stats;
 
-    //Components and state variables
     private ObjectPooler objectPooler;
     private Light shootingLight;
     private ParticleSystem particles;
     private AudioSource fireAudio;
     private bool effectsEnabled = false;
     private float timer;
+    private float reattackTime;
 
     [HideInInspector] public Transform bulletSpawn;
 
@@ -27,20 +26,25 @@ public class Weapon : Item
         set
         {
             stats = value;
-            SetProperties();
+            if (stats != null)
+            {
+                SetProperties();
+            }
         }
     }
 
     // Use this for initialization
-    void Awake ()
+    void Awake()
     {
-        FindReferences();
-        if (stats != null) SetProperties(); //updates rendering materials if stats are already set
+        if (Stats != null)
+        {
+            SetProperties();
+        }
         bulletSpawn = gameObject.FindComponentInChildWithTag<Transform>("BulletSpawn");
         shootingLight = bulletSpawn.GetComponent<Light>();
         particles = bulletSpawn.GetComponent<ParticleSystem>();
         fireAudio = bulletSpawn.GetComponent<AudioSource>();
-	}
+    }
 
     private void Start()
     {
@@ -50,33 +54,40 @@ public class Weapon : Item
     private void Update()
     {
         timer += Time.deltaTime;
-        if(effectsEnabled && timer>=stats.effectsDuration)
+        if (effectsEnabled && timer >= Stats.effectsDuration)
         {
             DisableEffects();
         }
     }
 
     /// <summary>
-    /// Updates rendering data.
+    /// Updates weapon specific properties.
     /// </summary>
-    protected override void SetProperties()
+    protected void SetProperties()
     {
-        if (stats != null)
-        {
-            itemRenderer.material = stats.material;
-            timer = stats.reattackTime;
-        }
-        base.SetProperties();
+        GetComponent<MeshRenderer>().material = Stats.material;
+        timer = 0f;
+        reattackTime = Stats.reattackTime;
+    }
+
+    public void Use(GameObject target=null)
+    {
+        Shoot();
+    }
+
+    public void Remove()
+    {
+        Destroy(gameObject);
     }
 
     public void Shoot()
     {
-        if (timer >= stats.reattackTime)
+        if (timer >= reattackTime)
         {
             timer = 0f;
-            GameObject bullet = objectPooler.SpawnFromPool("Bomb", bulletSpawn.position, bulletSpawn.rotation);
+            GameObject bullet = objectPooler.SpawnFromPool(Stats.projectilePrefab, bulletSpawn.position, bulletSpawn.rotation);
             EnableEffects();
-            bullet.GetComponent<Bomb>().SetMultipliers(stats.forceMult, stats.damageMult);
+            bullet.GetComponent<Bomb>().SetMultipliers(Stats.forceMult, Stats.damageMult);
         }
     }
 

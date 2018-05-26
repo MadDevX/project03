@@ -36,15 +36,13 @@ public class EnemyShooting : MonoBehaviour {
         while (hasTarget)
         {
             bool noObstacle = true;
-            RaycastHit hit;
-            if (Physics.Linecast(equip.currentWeapon.bulletSpawn.position, nav.destination, out hit))
+
+            //check for obstacles
+
+            Vector3 distance = nav.destination - transform.position;
+            if (noObstacle && distance.magnitude < range && timer >= fireDelay)
             {
-                noObstacle = (hit.transform.tag.StartsWith("Character") || hit.transform.tag == "Player" || hit.transform.tag == "Projectile") && (hit.transform.tag != transform.tag);
-            }
-            Vector3 distance = nav.destination - equip.currentWeapon.transform.position;
-            if (equip.currentWeapon != null && noObstacle && distance.magnitude < range && timer >= fireDelay)
-            {
-                equip.currentWeapon.Shoot();
+                equip.UseWeapon();
             }
             yield return new WaitForSeconds(attackFrequency);
         }
@@ -56,8 +54,8 @@ public class EnemyShooting : MonoBehaviour {
     public void TargetFound()
     {
         hasTarget = true;
-        StartCoroutine("Attack");
         timer = 0f;
+        StartCoroutine("Attack");
     }
 
     /// <summary>

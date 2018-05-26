@@ -1,36 +1,52 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerInput : MonoBehaviour
 {
-    [SerializeField] PlayerMovement pMovement;
-    [SerializeField] PlayerShooting pShooting;
-    [SerializeField] PlayerAction pAction;
+    private PlayerMovement pMovement;
+    private CharacterEquipment pEquipment;
+    private PlayerAction pAction;
+
+    private void Awake()
+    {
+        pMovement = GetComponent<PlayerMovement>();
+        pEquipment = GetComponent<CharacterEquipment>();
+        pAction = GetComponent<PlayerAction>();
+    }
+
+    private void FixedUpdate()
+    {
+        pMovement.Move();
+
+        pMovement.Rotate();
+    }
 
 	void Update ()
     {
-        if (!PauseMenu.GameIsPaused)
+        if (!PauseMenu.GameIsPaused && !EventSystem.current.IsPointerOverGameObject())
         {
-            if (Input.GetButton("Fire1"))
-            {
-                pShooting.UseWeapon();
-            }
-
             if (Input.GetButton("Jump"))
             {
                 pMovement.Dodge();
             }
 
-            if (Input.GetKeyUp(KeyCode.E))
+            if (Input.GetButton("Fire1"))
+            {
+                pEquipment.UseWeapon();
+            }
+
+            if (Input.GetButtonUp("Interact"))
             {
                 pAction.InteractWith();
             }
 
-            if (Input.GetKeyDown(KeyCode.T))
+            if (Input.GetButtonDown("Drop"))
             {
-                pAction.DetachWeapon();
+                //
             }
         }
     }
+
 }
