@@ -16,7 +16,7 @@ AudioMixerController:
   m_UpdateMode: 0
   m_ExposedParameters:
   - guid: fabb512fd2d1dc44491bf2447b569b72
-    name: volumeDialogue
+    name: volumeAmbient
   - guid: 753f25d1bbcbddc40b30613fc8b45340
     name: volumeFX
   - guid: 6a7492db9cb391745957bfb691b24ffc
@@ -80,7 +80,7 @@ AudioMixerGroupController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Dialogue
+  m_Name: Ambient
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: f56f1239f9c480e48bf6059ecb8b1590
   m_Children: []

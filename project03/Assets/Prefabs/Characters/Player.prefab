@@ -207,14 +207,14 @@ GameObject:
   - component: {fileID: 136464705907913094}
   - component: {fileID: 23902279977403508}
   - component: {fileID: 54083885843182758}
+  - component: {fileID: 96835961160685398}
   - component: {fileID: 114603229715955910}
+  - component: {fileID: 114370482587622482}
   - component: {fileID: 114469478152964388}
   - component: {fileID: 114454032805243148}
   - component: {fileID: 114093775048179514}
   - component: {fileID: 114896504960516286}
-  - component: {fileID: 96835961160685398}
   - component: {fileID: 114771027090172280}
-  - component: {fileID: 114051654331569696}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -476,19 +476,6 @@ TrailRenderer:
     textureMode: 0
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
---- !u!114 &114051654331569696
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1775658234112748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b675f0afa750394f9ba3cf6b60fbc19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  space: 20
-  items: []
 --- !u!114 &114093775048179514
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -669,6 +656,19 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114370482587622482
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1775658234112748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7594742fcd67d2469e740205f03c662, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  space: 20
+  items: []
 --- !u!114 &114433997161957208
 MonoBehaviour:
   m_ObjectHideFlags: 1

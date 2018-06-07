@@ -23,7 +23,6 @@ public class PlayerManager : MonoBehaviour, ICharacterManager
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
         gameUI.SetActive(false);
         gameOverScreen.SetActive(true);
-        PlayerInventory.Instance = null;
-        PlayerManager.playerInstance = null;
+        playerInstance = null;
     }
 }

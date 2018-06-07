@@ -8,7 +8,7 @@ using Helper;
 
 public class GameController : MonoBehaviour {
 
-    
+    public bool isSpawning;
     public GameObject enemyPrefab;
     public Transform[] spawnPositions;
     public GameObject UICanvas;
@@ -18,11 +18,16 @@ public class GameController : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        if (!isSpawning) return;
         foreach (Transform t in spawnPositions)
         {
             Instantiate(enemyPrefab, t.position, t.rotation);
         }
-        enemiesLeft = spawnPositions.Length;
+    }
+
+    public void EnemySpawned()
+    {
+        enemiesLeft++;
     }
 
     public void EnemyKilled()

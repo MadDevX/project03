@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterInventory : MonoBehaviour
 {
-    public delegate void OnItemChanged();
+    public delegate void OnItemChanged(CharacterInventory inv);
     public OnItemChanged onItemChangedCallback;
 
     public int space = 20;
@@ -22,7 +22,7 @@ public class CharacterInventory : MonoBehaviour
         items.Add(item);
         if (onItemChangedCallback != null)
         {
-            onItemChangedCallback.Invoke();
+            onItemChangedCallback.Invoke(this);
         }
         return true;
     }
@@ -33,7 +33,12 @@ public class CharacterInventory : MonoBehaviour
 
         if (onItemChangedCallback != null)
         {
-            onItemChangedCallback.Invoke();
+            onItemChangedCallback.Invoke(this);
         }
+    }
+
+    public List<ItemDetails> GetItemList()
+    {
+        return items;
     }
 }

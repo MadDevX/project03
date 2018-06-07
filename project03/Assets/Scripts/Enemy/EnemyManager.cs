@@ -13,15 +13,15 @@ public class EnemyManager : MonoBehaviour, ICharacterManager
     {
         equip = GetComponent<CharacterEquipment>();
         inv = GetComponent<CharacterInventory>();
-        WeaponDetails curWep = weaponPool[Random.Range(0, weaponPool.Count)];
-        inv.Add(curWep);
-        equip.EquipItem(curWep);
-        
     }
 
     private void Start()
     {
         gc = FindObjectOfType<GameController>();
+        gc.EnemySpawned();
+        WeaponDetails curWep = weaponPool[Random.Range(0, weaponPool.Count)];
+        inv.Add(curWep);
+        equip.EquipItem(curWep);
     }
 
     public void OnDeath()

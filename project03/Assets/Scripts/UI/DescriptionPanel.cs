@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class DescriptionPanel : MonoBehaviour
 {
-    public Image panel;
+    public Vector3 offset;
+    public GameObject panel;
     public TextMeshProUGUI text;
     private RectTransform rectTransform;
 
@@ -32,20 +33,30 @@ public class DescriptionPanel : MonoBehaviour
 
     IEnumerator ShowPanel(string s)
     {
-        rectTransform.position = Input.mousePosition;
+        //rectTransform.position = Input.mousePosition + offset;
         text.SetText(s);
         yield return new WaitForSeconds(0.05f);
         Vector2 height = rectTransform.sizeDelta;
-        height.y = text.renderedHeight*1.08f;
+        height.y = text.renderedHeight+30;
         rectTransform.sizeDelta = height;
-        panel.enabled = true;
+        panel.SetActive(true);
         text.alpha = 1;
+        yield break;
+    }
+
+    IEnumerator ShowPanel(ItemDetails item)
+    {
+        yield break;
+    }
+
+    IEnumerator ShowPanel(InteractableDetails item)
+    {
         yield break;
     }
 
     public void HidePanel()
     {
-        panel.enabled = false;
+        panel.SetActive(false);
         text.alpha = 0;
     }
 

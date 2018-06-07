@@ -7,7 +7,7 @@ using Enums;
 public class ItemPickup : MonoBehaviour, IInteractable
 {
     [SerializeField] protected ItemDetails stats;
-    protected Renderer itemRenderer;
+    private Renderer itemRenderer;
     private Color startColor;
 
     public ItemDetails Stats

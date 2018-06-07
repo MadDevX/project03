@@ -67,4 +67,13 @@ public class CharacterEquipment : MonoBehaviour {
             weapon.Use();
         }
     }
+
+    public void UseAccessory()
+    {
+        IEquipment accessory = attachmentPoints[(int)EquipmentType.Accessory].currentItem;
+        if (accessory != null)
+        {
+            accessory.Use();
+        }
+    }
 }

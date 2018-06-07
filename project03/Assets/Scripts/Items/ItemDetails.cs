@@ -9,6 +9,7 @@ public class ItemDetails : ScriptableObject
 {
     public new string name;
     public string description;
+    public int price;
     public Sprite icon;
 
     public Material material;

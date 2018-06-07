@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Name: The Tube
   m_EditorClassIdentifier: 
   name: The Tube
-  description: Not just 'a' tube. It's 'The' Tube.
+  description: Not just 'a' tube. It's 'The' Tube. Shoots hot potatoes.
+  price: 50
   icon: {fileID: 21300000, guid: 9458fd2dc64f01a489a78079e91ab19a, type: 3}
   material: {fileID: 2100000, guid: 416c2dbfcc250ab4a81d31a8c3ca63f5, type: 2}
   itemModel: {fileID: 1164085082121768, guid: bb2b0777e1871f341b8dcd776ef796b7, type: 2}

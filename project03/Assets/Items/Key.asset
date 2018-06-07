@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ff1468e17fefc64c82edc2e3223efd4, type: 3}
+  m_Name: Key
+  m_EditorClassIdentifier: 
+  name: Key
+  description: Opens a not-yet-implemented door.
+  price: 5
+  icon: {fileID: 21300000, guid: aec246571cf7b2c439d3e7cc5b9a6ba5, type: 3}
+  material: {fileID: 2100000, guid: 4f477167fc0be5e4dab9a125b37c42ad, type: 2}
+  itemModel: {fileID: 1266642002028872, guid: c47c206346d8e9a4abc92ec7a2be8329, type: 2}

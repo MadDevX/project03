@@ -8,6 +8,16 @@ public class InventorySlot : MonoBehaviour
     public Button removeButton;
     ItemDetails item;
 
+    private static CharacterInventory playerInv;
+
+    private void Start()
+    {
+        if(playerInv==null)
+        {
+            playerInv = PlayerManager.playerInstance.GetComponent<CharacterInventory>();
+        }
+    }
+
 
     public void AddItem(ItemDetails newItem)
     {
@@ -33,7 +43,7 @@ public class InventorySlot : MonoBehaviour
 
     public void OnRemoveButton()
     {
-        PlayerInventory.Instance.Remove(item);
+        playerInv.Remove(item);
     }
 
     public void UseItem()
