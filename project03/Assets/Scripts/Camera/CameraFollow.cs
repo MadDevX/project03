@@ -12,7 +12,7 @@ public class CameraFollow : MonoBehaviour
     public float fadeAlpha = 0.1f;
     public int fadeoutFrames = 15;
 
-    [SerializeField] private Transform target;
+    private Transform target;
     [SerializeField] private Vector3 offset;
     private AudioListener cameraListener;
     private Vector3 startPosition;
@@ -40,6 +40,10 @@ public class CameraFollow : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+        if(Target==null && PlayerManager.playerInstance!=null)
+        {
+            Target = PlayerManager.playerInstance.transform;
+        }
         startPosition = transform.position;
         cameraListener = GetComponentInChildren<AudioListener>();
         cameraListener.transform.SetPositionAndRotation(transform.position - offset, Quaternion.LookRotation(Vector3.forward, Vector3.up));

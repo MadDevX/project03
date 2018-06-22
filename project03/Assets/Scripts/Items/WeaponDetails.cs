@@ -6,8 +6,8 @@ using Enums;
 [CreateAssetMenu(fileName = "New Weapon", menuName = "Items/Weapon")]
 public class WeaponDetails : EquipmentDetails
 {
-    public float forceMult = 1f;
-    public float damageMult = 1f;
+    public float range = 1f;
+    public float damage = 1f;
     public float reattackTime = 1f;
     public float effectsDuration = 0.05f;
     public string projectilePrefab;

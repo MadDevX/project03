@@ -7,12 +7,12 @@ using UnityEngine.EventSystems;
 public class PlayerAction : MonoBehaviour {
 
     public SpriteRenderer interactionRenderer;
-    public Camera mainCamera;
     public float maxDist = 100f;
     public float interactionRange = 3f;
     public int interactionLingerFrames = 20;
     private int interactableMask;
     private IInteractable activeObject;
+    //private Camera mainCamera;
 
     private IInteractable ActiveObject
     {
@@ -41,10 +41,11 @@ public class PlayerAction : MonoBehaviour {
 
     void Start()
     {
-        if (mainCamera == null)
-        {
-            mainCamera = Camera.main;
-        }
+        //if (mainCamera == null)
+        //{
+        //    mainCamera = Camera.main;
+        //}
+        LevelLoader.Instance.loadFinished += LevelEnter;
         interactableMask = LayerMask.GetMask("Interactable");
         interactionRenderer.transform.localScale = new Vector3(interactionRange, interactionRange, 0);
         ActiveObject = null;
@@ -99,7 +100,7 @@ public class PlayerAction : MonoBehaviour {
     {
         while (true)
         {
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             Physics.Raycast(ray, out hit, maxDist, interactableMask);
             if (hit.transform && ((hit.transform.position - transform.position).magnitude <= interactionRange))
@@ -123,5 +124,11 @@ public class PlayerAction : MonoBehaviour {
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, interactionRange);
+    }
+
+    private void LevelEnter()
+    {
+        StopAllCoroutines();
+        StartCoroutine(HighlightInteractable());
     }
 }

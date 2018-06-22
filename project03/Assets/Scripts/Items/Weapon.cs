@@ -7,13 +7,13 @@ public class Weapon : MonoBehaviour, IEquipment
 {
     [SerializeField] private WeaponDetails stats;
 
-    private ObjectPooler objectPooler;
-    private Light shootingLight;
-    private ParticleSystem particles;
-    private AudioSource fireAudio;
-    private bool effectsEnabled = false;
-    private float timer;
-    private float reattackTime;
+    protected ObjectPooler objectPooler;
+    protected Light shootingLight;
+    protected ParticleSystem particles;
+    protected AudioSource fireAudio;
+    protected bool effectsEnabled = false;
+    protected float timer;
+    protected float reattackTime;
 
     [HideInInspector] public Transform bulletSpawn;
 
@@ -80,18 +80,18 @@ public class Weapon : MonoBehaviour, IEquipment
         Destroy(gameObject);
     }
 
-    public void Shoot()
+    public virtual void Shoot()
     {
         if (timer >= reattackTime)
         {
             timer = 0f;
             GameObject bullet = objectPooler.SpawnFromPool(Stats.projectilePrefab, bulletSpawn.position, bulletSpawn.rotation);
             EnableEffects();
-            bullet.GetComponent<Bomb>().SetMultipliers(Stats.forceMult, Stats.damageMult);
+            bullet.GetComponent<Bomb>().SetMultipliers(Stats.range, Stats.damage);
         }
     }
 
-    void EnableEffects()
+    protected virtual void EnableEffects()
     {
         shootingLight.enabled = true;
         particles.Play();
@@ -100,7 +100,7 @@ public class Weapon : MonoBehaviour, IEquipment
         effectsEnabled = true;
     }
 
-    void DisableEffects()
+    protected virtual void DisableEffects()
     {
         shootingLight.enabled = false;
         particles.Stop();

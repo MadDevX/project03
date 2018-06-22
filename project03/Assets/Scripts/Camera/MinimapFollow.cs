@@ -39,6 +39,10 @@ public class MinimapFollow : MonoBehaviour
         }
         else
         {
+            if(PlayerManager.playerInstance!=null)
+            {
+                Player = PlayerManager.playerInstance.transform;
+            }
             transform.position = Vector3.Lerp(transform.position, startPosition, lerpFactor);
         }
     }

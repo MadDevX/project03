@@ -11,10 +11,11 @@ public class InventoryUIList : MonoBehaviour
     public Animator buttonAnimator;
     public Color hideColor;
     public Color activeColor;
+    private CharacterInventory pInv;
 
     private void Start()
     {
-        CharacterInventory pInv = PlayerManager.playerInstance.GetComponent<CharacterInventory>();
+        pInv = PlayerManager.playerInstance.GetComponent<CharacterInventory>();
         pInv.onItemChangedCallback += ButtonAnimation;
         itemList.Container = pInv;
     }
@@ -44,5 +45,10 @@ public class InventoryUIList : MonoBehaviour
     void ButtonAnimation(CharacterInventory inv)
     {
         buttonAnimator.SetTrigger("WiggleTrigger");
+    }
+
+    private void OnDestroy()
+    {
+        pInv.onItemChangedCallback = null;
     }
 }

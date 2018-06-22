@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Helper;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour {
 
@@ -11,7 +12,7 @@ public class PlayerMovement : MonoBehaviour {
     public float minDist;
     public float dodgeReset;
     public float slerpValue;
-    public Camera mainCamera;
+    //public Camera mainCamera;
     public Slider dodgeSlider;
 
     private float camRayLength = 100f;
@@ -36,13 +37,17 @@ public class PlayerMovement : MonoBehaviour {
         isFlipped = false;
 	}
 
-    private void Start()
-    {
-        if (mainCamera == null)
-        {
-            mainCamera = Camera.main;
-        }
-    }
+    //private void Start()
+    //{
+    //    if (mainCamera == null)
+    //    {
+    //        mainCamera = Camera.main;
+    //    }
+    //    if (LevelLoader.Instance != null)
+    //    {
+    //        LevelLoader.Instance.loadFinished += LevelEnter;
+    //    }
+    //}
 
     private void FixedUpdate()
     {
@@ -90,7 +95,7 @@ public class PlayerMovement : MonoBehaviour {
 
     public void Rotate()
     {
-        Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
+        Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit groundHit;
         if (Physics.Raycast(cameraRay, out groundHit, camRayLength, groundMask))
         {
@@ -110,4 +115,10 @@ public class PlayerMovement : MonoBehaviour {
     {
         isFlipped = !isFlipped;
     }
+
+
+    //private void LevelEnter()
+    //{
+    //    mainCamera = Camera.main;
+    //}
 }

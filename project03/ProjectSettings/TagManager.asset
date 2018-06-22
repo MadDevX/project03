@@ -17,6 +17,10 @@ TagManager:
   - LoadingScreen
   - MenuScreen
   - PersistentObject
+  - SpawnN
+  - SpawnW
+  - SpawnS
+  - SpawnE
   layers:
   - Default
   - TransparentFX

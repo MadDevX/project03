@@ -10,6 +10,9 @@ public class LevelLoader : MonoBehaviour
     [SerializeField] Slider slider;
     [SerializeField] Text progressText;
     public static int CurrentScene { get; private set; }
+    public delegate void LoaderStateChanged();
+    public LoaderStateChanged loadStarted;
+    public LoaderStateChanged loadFinished;
 
     #region Singleton
     public static LevelLoader Instance;
@@ -29,12 +32,20 @@ public class LevelLoader : MonoBehaviour
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
         loadingScreen.SetActive(true);
+        if(loadStarted!=null)
+        {
+            loadStarted.Invoke();
+        }
         while(!operation.isDone)
         {
             float progress = Mathf.Clamp01(operation.progress / 0.9f);
             slider.value = progress;
             progressText.text = (int)(progress * 100f) + "%";
             yield return null;
+        }
+        if(loadFinished!=null)
+        {
+            loadFinished.Invoke();
         }
         loadingScreen.SetActive(false);
         CurrentScene = sceneIndex;

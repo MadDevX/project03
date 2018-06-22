@@ -780,6 +780,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponPool:
   - {fileID: 11400000, guid: a5fa53524849a864291e4d18b08cf43a, type: 2}
+  - {fileID: 11400000, guid: b6fb8ada33ac6c1429ad011b57963bab, type: 2}
 --- !u!114 &114390361523327114
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1108,7 +1109,7 @@ MonoBehaviour:
   attachmentPoints:
   - type: 0
     position: {x: 0.5, y: 0, z: 0.2}
-    rotation: {x: 0, y: 90, z: 90}
+    rotation: {x: 0, y: 0, z: 0}
   - type: 1
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0}

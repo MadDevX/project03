@@ -272,7 +272,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1775658234112748}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: -25, y: 1, z: 15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4036889845379814}
@@ -492,7 +492,6 @@ MonoBehaviour:
   minDist: 1
   dodgeReset: 1
   slerpValue: 0.08
-  mainCamera: {fileID: 0}
   dodgeSlider: {fileID: 114960438689596766}
 --- !u!114 &114317878668787244
 MonoBehaviour:
@@ -709,6 +708,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverScreen: {fileID: 0}
   gameUI: {fileID: 0}
+  spawnPoint: 
 --- !u!114 &114469478152964388
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -723,7 +723,7 @@ MonoBehaviour:
   attachmentPoints:
   - type: 0
     position: {x: 0.5, y: 0, z: 0.2}
-    rotation: {x: 0, y: 90, z: 90}
+    rotation: {x: 0, y: 0, z: 0}
   - type: 1
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0}
@@ -903,7 +903,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionRenderer: {fileID: 212440040607409120}
-  mainCamera: {fileID: 0}
   maxDist: 100
   interactionRange: 4
   interactionLingerFrames: 20
