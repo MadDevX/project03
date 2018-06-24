@@ -54,7 +54,7 @@ public class ObjectPooler : MonoBehaviour {
             return null;
         }
         GameObject objectToSpawn;
-        if (poolDictionary[tag].Peek().activeSelf)
+        if (poolDictionary[tag].Count==0 || poolDictionary[tag].Peek().activeSelf)
         {
             int i = 0;
             while (i < pools.Count && pools[i].tag != tag) i++;
